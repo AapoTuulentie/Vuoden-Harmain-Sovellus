@@ -61,17 +61,10 @@ def form_citations_list():
         return False
     citations = get_citations()
     for citation in citations:
-        author = citation[1]
-        title = citation[2]
-        publisher = citation[3]
-        year = citation[4]
-        doi = citation[5]
-        isbin = citation[6]
-        editor = citation[7]
-        pages = citation[8]
-        shorthand = citation[9]
+        (citation_id, author, title, publisher,
+         year, doi, isbin, editor, pages, shorthand) = citation
         section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand]
-        citation_list.append((add_section_to_citation(section), citation[0]))
+        citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
 def add_section_to_citation(section):
