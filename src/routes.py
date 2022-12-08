@@ -64,7 +64,7 @@ def add_citation():
     editor = request.form["editor"]
     pages = request.form["pages"]
     shorthand = request.form["shorthand"]
-    if not citations.add_citation(author, title, year, publisher, doi, isbn, editor, pages, shorthand):
+    if not citations.add_citation(author, title, year):
         return render_template("errors.html", error="Ei onnistunut")
     return redirect(request.referrer)
 

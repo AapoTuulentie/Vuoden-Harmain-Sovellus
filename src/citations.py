@@ -1,13 +1,13 @@
 from db import db
 from flask import session
 
-def add_citation(author, title, year, publisher, doi, isbn, editor, pages, shorthand):
+def add_citation(author, title, year):
     if not session or title == "" or not year.isdigit():
         return False
     user_id = session.get("user_id")
     try:
-        sql = "INSERT INTO entries (author, title, year, publisher, doi, isbn, editor, pages, shorthand, user_id) VALUES (:author, :title, :year, :publisher, :doi, :isbn, :editor, :pages, :shorthand, :user_id)"
-        db.session.execute(sql, {"author":author, "title":title, "year":year, "publisher":publisher, "doi":doi, "isbn":isbn, "editor":editor, "pages":pages, "shorthand": shorthand, "user_id":user_id})
+        sql = "INSERT INTO entries (author, title, year, user_id) VALUES (:author, :title, :year, :user_id)"
+        db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id})
         db.session.commit()
         return True
     except:
@@ -62,8 +62,8 @@ def form_citations_list():
     citations = get_citations()
     for citation in citations:
         (citation_id, author, title, publisher,
-         year, doi, isbin, editor, pages, shorthand) = citation
-        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand]
+         year, doi, isbn, editor, pages, shorthand) = citation
+        section = [author, title, publisher, year, doi, isbn, editor, pages, shorthand]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
