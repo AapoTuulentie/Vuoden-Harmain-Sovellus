@@ -4,7 +4,7 @@
 | **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
 |---|---|---|---|
 |  **Käyttäjä voi luoda viitteistään BibTex-tiedoston**    |
-|Tiedosto yhdestä viitteestä   |   |   |  |
+|Tiedosto yhdestä viitteestä   | Jaakko  | Hieman kesken, testaamatta  | 30 min |
 |Tiedoston voi ladata tai kopioida  |   |   |  |
 |  **Käyttäjä voi luoda viitteen haluamastaan lähdetyypistä (artikkeli jne.)**    |
 |  **Käyttäjä voi muokata tallentamiaan viitteitä**  
