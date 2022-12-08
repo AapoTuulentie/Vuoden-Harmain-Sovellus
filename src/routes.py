@@ -93,4 +93,8 @@ def download_bib_file(self):
     path = "bibtex.bib"
     return send_file(path, as_attachment=True)
 
+@app.route("/copybib", methods=["GET"])
+def display_bib(self):
+    with open("bibtex.bib", encoding="utf-8") as f:
+        return render_template("bibfile.html", bib=f.read())
     
