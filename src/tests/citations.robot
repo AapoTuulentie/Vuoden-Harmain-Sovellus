@@ -25,6 +25,7 @@ Modify Citation
 Delete Citation
     Delete Citation
     Output Should Not Contain  Nimi
+    Log Out
 
 *** Keywords ***
 
