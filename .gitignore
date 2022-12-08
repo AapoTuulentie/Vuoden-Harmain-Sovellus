@@ -16,3 +16,4 @@ htmlcov
 venv
 
 .DS_Store
+*.bib
