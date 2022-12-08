@@ -5,7 +5,7 @@
 |---|---|---|---|
 |  **Käyttäjä voi luoda viitteistään BibTex-tiedoston**    |
 |Tiedosto yhdestä viitteestä   | Jaakko  | Hieman kesken, testaamatta  | 30 min |
-|Tiedoston voi ladata tai kopioida  |   |   |  |
+|Tiedoston voi ladata tai kopioida  | Jenni  | Aloitettu  | 45min |
 |  **Käyttäjä voi luoda viitteen haluamastaan lähdetyypistä (artikkeli jne.)**    |
 |  **Käyttäjä voi muokata tallentamiaan viitteitä**  
 |Viitteen vieressä nappi, joka vie muutos sivulle | Eero | Valmis | |
