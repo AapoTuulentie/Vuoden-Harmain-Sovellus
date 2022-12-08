@@ -55,4 +55,4 @@ def create_bibtex_from_one_citation(id):
         bibtex.close()
     except:
         return False        
-    return True
+    return True   
