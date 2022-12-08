@@ -16,6 +16,15 @@ Add and view Citation After Registering
     Submit Citation
     Output Should Contain  Herra Hakkarainen
 
+Modify Citation
+    Click Muokkaa
+    Modify Title  Nimi
+    Click Muokkaa
+    Output Should Contain  Nimi
+
+Delete Citation
+    Delete Citation
+    Output Should Not Contain  Nimi
 
 *** Keywords ***
 
@@ -27,6 +36,16 @@ Input Citation Info
 
 Submit Citation
     Click Button  Lisää viite
+
+Delete Citation
+    Click Button  Poista
+
+Click Muokkaa
+    Click Button  Muokkaa
+
+Modify Title
+    [Arguments]  ${title}
+    Input text  title  ${title}
     
 Go To Register Page
     Click Link  Luo uusi tunnus
@@ -56,3 +75,11 @@ Submit Credentials
 Output Should Contain
     [Arguments]  ${message}
     Page Should Contain  ${Message}
+
+Output Should Not Contain
+    [Arguments]  ${message}
+    Page Should Not Contain  ${Message}
+
+Log Out
+    Click Link  Kirjaudu ulos
+
