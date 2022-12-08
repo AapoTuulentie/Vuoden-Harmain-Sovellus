@@ -23,5 +23,5 @@ jobs:
 
       - name: Run robot tests
         run: |
-          dotenv -f ./.env.test run -- flask run
+          dotenv -f ./src/.env.test run -- flask run
           poetry run robot src/tests
