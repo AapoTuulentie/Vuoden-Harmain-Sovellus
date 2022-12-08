@@ -1,4 +1,5 @@
 from app import app
+from bibtex_creator import create_bibtex_from_all_citations
 
 from flask import redirect, render_template, request, send_file, session
 from os import getenv
@@ -90,11 +91,13 @@ def modify_citation(id):
 
 @app.route("/dlbib")
 def download_bib_file():
-    path = "bibtex.bib"
-    return send_file(path, as_attachment=True)
+    if create_bibtex_from_all_citations():
+        path = "bibtex.bib"
+        return send_file(path, as_attachment=True)
 
 @app.route("/copybib", methods=["GET"])
 def display_bib():
-    with open("bibtex.bib", encoding="utf-8") as f:
-        return render_template("bibfile.html", bib=f.read())
+    if create_bibtex_from_all_citations():
+        with open("bibtex.bib", encoding="utf-8") as f:
+            return render_template("bibfile.html", bib=f.read())
     
