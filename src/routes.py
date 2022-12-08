@@ -1,6 +1,6 @@
 from app import app
 
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, send_file, session
 from os import getenv
 import users
 import citations
@@ -87,5 +87,10 @@ def modify_citation(id):
         shorthand = request.form["shorthand"]
         citations.modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
     return redirect("/")
+
+@app.route("/dlbib")
+def download_bib_file(self):
+    path = "bibtex.bib"
+    return send_file(path, as_attachment=True)
 
     
