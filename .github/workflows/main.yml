@@ -20,5 +20,8 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
+     
       - name: Run robot tests
-        run: bash run_robot_tests.sh
+        run: |
+        dotenv -f ../.env.test run -- flask run 
+        coverage run -m robot suites; coverage report;
