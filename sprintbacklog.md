@@ -12,7 +12,7 @@
 | Muutos sivulla lomake, joissa default arvoina viitteen nykyiset tiedot | Eero | Työn alla | 30 min |
 | Viiteen default arvoja voi muokkaa | Eero | Työn alla | 15 min |
 | Uudet arvot tallentuvat tietokantaan | Eero | Työn alla | 20 min |
-|  **Käyttäjä voi poistaa viitteen**    |
+|  **Käyttäjä voi poistaa viitteen**    | Aapo | Valmis |  |
 |  **Testitietokanta kuntoon**    | Sauli  | Valmis jollain tavalla|  |
 |  **Fly.io toimimaan (ehkä)**    |
 | **Sovelluksella on alustava graafinen käyttöliittymä**  |   |   |  |
