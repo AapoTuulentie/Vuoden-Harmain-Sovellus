@@ -20,8 +20,8 @@ CREATE TABLE entries (
     editor TEXT,
     pages TEXT,
     shorthand TEXT,
-    user_id INTEGER REFERENCES users ON DELETE CASCADE
-    citationtype TEXT,
+    user_id INTEGER REFERENCES users ON DELETE CASCADE,
+    citationtype TEXT
 
 );
 

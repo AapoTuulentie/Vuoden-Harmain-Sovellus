@@ -7,6 +7,7 @@ Test Setup  Go To Main Page First
 
 *** Test Cases ***
 Register With Valid Username And Password
+    Reset Database First
     Go To Register Page
     Set Username  nimi
     Set Password  salasana123
@@ -16,6 +17,7 @@ Register With Valid Username And Password
     Log Out
 
 Can not Register With Too Short Username
+    Reset Database First
     Go To Register Page
     Set Username  ni
     Set Password  salasana123
@@ -24,6 +26,7 @@ Can not Register With Too Short Username
     Register Should Fail
 
 Can not Register With Too Short Password
+    
     Go To Register Page
     Set Username  nimi
     Set Password  sa
@@ -40,6 +43,8 @@ Can not Register With Password Mismatch
     Register Should Fail With Message  Salasanat eivät ole samat
 
 Registered User Should Be Able To Log In
+    Reset Database First
+
     Go To Register Page
     Set Username  nimi1  
     Set Password  salasana123
@@ -53,15 +58,20 @@ Registered User Should Be Able To Log In
     Log Out
 
 Log In Should Not Work With Incorrect Credentials
+    Reset Database First
+
     Set Username  hakkeripahis
     Set Password Main Page  salasana123
     Log In
     Log In Should Fail With Message  Väärä käyttäjätunnus tai salasana 
 
 Logging Out Redirects To Main Page
-    Set Username  nimi
-    Set Password Main Page  salasana123
-    Log In
+    Reset Database First
+    Go To Register Page
+    Set Username  nimi1  
+    Set Password  salasana123
+    Set Password Confirmation  salasana123
+    Submit Credentials
     Log Out
     Main Page Should Be Open
 
@@ -113,3 +123,6 @@ Log In
 
 Log In Should Succeed
     Main Page Should Be Open
+
+Reset Database First
+    Reset Database
