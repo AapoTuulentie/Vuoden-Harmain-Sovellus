@@ -8,10 +8,10 @@
 |Tiedoston voi ladata tai kopioida  |   |   |  |
 |  **Käyttäjä voi luoda viitteen haluamastaan lähdetyypistä (artikkeli jne.)**    |
 |  **Käyttäjä voi muokata tallentamiaan viitteitä**  
-|Viitteen vieressä nappi, joka vie muutos sivulle | Eero | Työn alla | 15 min |
-| Muutos sivulla lomake, joissa default arvoina viitteen nykyiset tiedot | Eero | Työn alla | 30 min |
-| Viiteen default arvoja voi muokkaa | Eero | Työn alla | 15 min |
-| Uudet arvot tallentuvat tietokantaan | Eero | Työn alla | 20 min |
+|Viitteen vieressä nappi, joka vie muutos sivulle | Eero | Valmis | |
+| Muutos sivulla lomake, joissa default arvoina viitteen nykyiset tiedot | Eero | Valmis | |
+| Viiteen default arvoja voi muokkaa | Eero | Valmis |  |
+| Uudet arvot tallentuvat tietokantaan | Eero | Valmis | |
 |  **Käyttäjä voi poistaa viitteen**    | Aapo | Valmis |  |
 |  **Testitietokanta kuntoon**    | Sauli  | Valmis jollain tavalla|  |
 |  **Fly.io toimimaan (ehkä)**    |
