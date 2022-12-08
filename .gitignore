@@ -4,7 +4,6 @@ report.html
 selenium-screenshot*
 
 .env
-.env.test
 __pycache__
 .pytest_cache
 src/__pycache__
