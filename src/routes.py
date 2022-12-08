@@ -89,12 +89,12 @@ def modify_citation(id):
     return redirect("/")
 
 @app.route("/dlbib")
-def download_bib_file(self):
+def download_bib_file():
     path = "bibtex.bib"
     return send_file(path, as_attachment=True)
 
 @app.route("/copybib", methods=["GET"])
-def display_bib(self):
+def display_bib():
     with open("bibtex.bib", encoding="utf-8") as f:
         return render_template("bibfile.html", bib=f.read())
     
