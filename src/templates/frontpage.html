@@ -4,10 +4,10 @@
 <p>Olet kirjautunut nimellä {{ session.user_name }}</p>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<div class="row">
-    <div class="col-md-9">
+<div class="header-text">
+    <h2>Kirjaudu Sisään</h2>
     </div>
-    <div class="col-md-3">
+    <div class="register">
         <form action="/login" method="POST">
             <p>Tunnus:<br>
                 <input type="text" name="username">
