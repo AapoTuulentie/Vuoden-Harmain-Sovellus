@@ -53,6 +53,6 @@
 |   |   |   |   |
 |**Sovelluksen kehitysympäristö on kunnossa**   |   |   |  
 | Testaus otettu käyttöön  | Heli  | Valmis |  |
-| Github actions otettu käyttöön  | Heli  | Valmis  |   |
+| Github actions otettu käyttöön  |   | Kesken  |   |
 
 <!-- |   |   |   |   |  < copypaste uusi rivi -->
