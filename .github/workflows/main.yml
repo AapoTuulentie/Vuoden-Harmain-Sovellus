@@ -32,6 +32,13 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
+
+      - name: Connect to PostgreSQL test
+        run: node client.js
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+
       - name: Run robot tests
         run: poetry run robot src/tests
         env:
