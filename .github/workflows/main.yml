@@ -22,6 +22,4 @@ jobs:
         run: poetry install
 
       - name: Run robot tests
-        run: |
-          dotenv -f ./src/.env.test run -- flask run
-          poetry run robot src/tests
+        run: poetry run robot src/tests
