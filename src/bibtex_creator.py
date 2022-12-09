@@ -1,4 +1,5 @@
 from citations import form_citations_library
+from flask import session
 #This is as name implies for manual testing purposes,
 #Will get deleted when proper tests are made
 
@@ -23,6 +24,8 @@ def get_all_citations():
     return form_citations_library()
 
 def create_bibtex_from_all_citations():
+    username = session.get("user_name")
+    
     all_citations = get_all_citations()
     try:
         for citation in all_citations.values():
@@ -32,7 +35,7 @@ def create_bibtex_from_all_citations():
                     if citation[key]:
                         bibtex_string +=(f'{key} = "{citation[key]}",\n')
             bibtex_string += "}\n"    
-            bibtex = open("bibtex.bib", "a")
+            bibtex = open(f"{username}.bib", "a")
             bibtex.write(bibtex_string)
             bibtex.close()
     except:

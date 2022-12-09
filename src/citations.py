@@ -1,17 +1,26 @@
 from db import db
 from flask import session
 
-def add_citation(author, title, year):
+def add_citation(author, title, year, citationtype, journal):
     if not session or title == "" or not year.isdigit():
         return False
     user_id = session.get("user_id")
-    try:
-        sql = "INSERT INTO entries (author, title, year, user_id) VALUES (:author, :title, :year, :user_id)"
-        db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id})
-        db.session.commit()
-        return True
-    except:
-        return False
+    if citationtype == "Book":
+        try:
+            sql = "INSERT INTO entries (author, title, year, user_id, citationtype) VALUES (:author, :title, :year, :user_id, :citationtype)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype})
+            db.session.commit()
+            return True
+        except:
+            return False
+    if citationtype == "Article":
+        try:
+            sql = "INSERT INTO entries (author, title, year, user_id, citationtype, journal) VALUES (:author, :title, :year, :user_id, :citationtype, :journal)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            db.session.commit()
+            return True
+        except:
+            return False
     
 def get_citations():
     if not session:
@@ -38,21 +47,26 @@ def delete_citation(id):
         
 def form_citations_library():
     citations_library = {}
+    
     if session:
         citations = get_citations()
+        
         for citation in citations:
-            if citation[0] not in citations_library.keys():
-                citations_library[0] = {}
-            citations_library[citation[0]]["author"] = citations[1]
-            citations_library[citation[0]]["title"] = citations[2]
-            citations_library[citation[0]]["publisher"] = citations[3]
-            citations_library[citation[0]]["year"] = citations[4]
-            citations_library[citation[0]]["doi"] = citations[5]
-            citations_library[citation[0]]["isbn"] = citations[6]
-            citations_library[citation[0]]["editor"] = citations[7]
-            citations_library[citation[0]]["pages"] = citations[8]
-            citations_library[citation[0]]["shorthand"] = citations[9]
-            citations_library[citation[0]]["type"] = citations[10]
+            
+            if citation[0] not in citations_library.keys():               
+                citations_library[citation[0]] = {}
+            
+            citations_library[citation[0]]["author"] = citation[1]
+            citations_library[citation[0]]["title"] = citation[2]
+            citations_library[citation[0]]["publisher"] = citation[3]
+            citations_library[citation[0]]["year"] = citation[4]
+            citations_library[citation[0]]["doi"] = citation[5]
+            citations_library[citation[0]]["isbn"] = citation[6]
+            citations_library[citation[0]]["editor"] = citation[7]
+            citations_library[citation[0]]["pages"] = citation[8]
+            citations_library[citation[0]]["shorthand"] = citation[9]
+            citations_library[citation[0]]["type"] = citation[11]
+            citations_library[citation[0]]["journal"] = citation[12]
     return citations_library
 
 def form_citations_list():

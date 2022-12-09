@@ -13,7 +13,9 @@ jobs:
       postgres:
         image: postgres
         env:
+          POSTGRES_DB: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -32,7 +34,17 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Run robot tests
-        run: poetry run robot src/tests
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+
+      - name: Setup database
+        run: psql -h postgres -U postgres_user -c 'CREATE DATABASE "postgres_db";'
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
+          PGPASSWORD: postgres
+      - name: Run robot tests
+        env:
+          DATABASE_URL: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
+          #DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
+        run: poetry run robot src/tests

@@ -26,7 +26,13 @@
 <form action="/add_citation" method="POST">
     <p style="font-size:20px">Uusi viite</p>
 
-    <label>Kirja: </label>
+    <label for="citationtype">Viitetyyppi</label>
+    <select name="citationtype" id="citationtype">
+        <option value="Book">Kirja</option>
+        <option value="Article">Artikkeli</option>
+    </select>
+
+    <label>Otsikko:</label>
     <input type="text" name="title">
 
     <label>Kirjoittaja: </label>
@@ -34,6 +40,10 @@
 
     <label>Vuosi: </label>
     <input type="number" name="year">
+
+    <label>Artikkelin julkaisu:</label>
+    <input type="text" name="journal">
+
     <input type="submit" value="Lisää viite">
 </form>
 <br>
@@ -52,6 +62,12 @@
     
     <hr>
     {% endfor %}
+</div>
+<div class="container text-center">
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <a class="btn btn-dark" href="dlbib" role="button">Lataa bib-tiedosto</a>
+        <a class="btn btn-dark" href="copybib" target="_blank" role="button">Tarkastele bib-tiedostoa</a>
+    </div>
 </div>
 {% endif %}
 {% endblock %}

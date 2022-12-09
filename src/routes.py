@@ -1,6 +1,7 @@
 from app import app
+from bibtex_creator import create_bibtex_from_all_citations
 
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, send_file, session
 from os import getenv
 import users
 import citations
@@ -57,7 +58,9 @@ def add_citation():
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
-    if not citations.add_citation(author, title, year):
+    citationtype = request.form["citationtype"]
+    journal = request.form["journal"]
+    if not citations.add_citation(author, title, year, citationtype, journal):
         return render_template("errors.html", error="Ei onnistunut")
     return redirect(request.referrer)
 
@@ -88,4 +91,19 @@ def modify_citation(id):
         citations.modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
     return redirect("/")
 
+@app.route("/dlbib")
+def download_bib_file():
+    if create_bibtex_from_all_citations():
+        username = session.get("user_name")
+        path = f"{username}.bib"
+        return send_file(path, as_attachment=True)
+
+@app.route("/copybib", methods=["GET"])
+
+def display_bib():
+    username = session.get("user_name")
+
+    if create_bibtex_from_all_citations():
+        with open(f"{username}.bib", encoding="utf-8") as f:
+            return render_template("bibfile.html", bib=f.read())
     
