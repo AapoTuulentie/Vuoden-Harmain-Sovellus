@@ -77,17 +77,16 @@ def form_citations_list():
         return False
     citations = get_citations()
     for citation in citations:
-        (citation_id, author, title, publisher, year, doi, isbin,
-        editor, pages, shorthand, user_id, citationtype, journal) = citation
-        section = [author, title, publisher, year, doi, isbin, editor, pages,
-        shorthand, citationtype]
+        (citation_id, author, title, publisher, year,
+        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
+        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand, citationtype, journal]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
 def add_section_to_citation(section):
     citation_text = ""
     if section[9] != "None" and section[9] != None:
-        citation_text += f"Viitteen tyyppi: {section[9],} "
+        citation_text += f"Viitteen tyyppi: {section[9]}, "
     if section[0] != "None" and section[0] != None:
         citation_text += f" Kirjoittaja: {section[0]}"
     if section[1] != "None" and section[1] != None:
@@ -106,7 +105,9 @@ def add_section_to_citation(section):
         citation_text += f", Sivut: {section[7]}"
     if section[8] != "None" and section[8] != None:
         citation_text += f", Shorthand: {section[8]}"
-
+    if section[10] != "None" and section[10] != None:
+        citation_text += f", Journal: {section[10]}"
+    
     return citation_text
 
 def get_one_citation(id):
