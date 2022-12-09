@@ -31,3 +31,4 @@ CREATE TABLE tags (
     user_id INTEGER REFERENCES users ON DELETE CASCADE,
     tag TEXT
 );
+
