@@ -48,3 +48,5 @@ jobs:
           DATABASE_URL: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
           #DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
         run: poetry run robot src/tests
+      - name: pylint
+        run: poetry run pylint src/
