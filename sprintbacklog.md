@@ -7,7 +7,7 @@
 |   |   |   |   |
 |  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    |
 |   |   |   |   |
-|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo |
 |   |   |   |   |
 |  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
@@ -66,8 +66,6 @@
 | Uloskirjautumisnappi löytyy sovelluksen kaikilta sivuilta käyttäjän ollessa kirjautuneena | Jenni  | Done  |  |
 | Uloskirjautumisnappia painamalla käyttäjä kirjautuu ulos | Jenni  | Done  |  |
 | Uloskirjautumisen jälkeen ei pääse takaisin käyttäjän tietoihin painamalla sovelluksen "takaisin" nappia | Jenni  | Kesken  | 5min  | 
-| **Käyttäjä voi käyttää sovellusta nettiselaimella**  |   |   |
-| Sovellus toimii fly.io:ssa  |Aapo   | Kesken  |   | 
 |   |   |   |   |
 |   |   |   |   |
 |**Sovelluksella on alustava graafinen käyttöliittymä**   |   |   |   
