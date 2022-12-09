@@ -84,7 +84,9 @@ def form_citations_list():
         editor = citation[7]
         pages = citation[8]
         shorthand = citation[9]
-        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand]
+        type = citation[11]
+        journal = citation[12]
+        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand, type, journal]
         citation_list.append((add_section_to_citation(section), citation[0]))
     return citation_list
 
@@ -108,6 +110,10 @@ def add_section_to_citation(section):
         citation_text += f", Sivut: {section[7]}"
     if section[8] != "None" and section[8] != None:
         citation_text += f", Shorthand: {section[8]}"
+    if section[9] != "None" and section[9] != None:
+        citation_text += f", Tyyppi: {section[9]}"
+    if section[10] != "None" and section[10] != None:
+        citation_text += f", Julkaisu: {section[10]}"
     return citation_text
 
 def get_one_citation(id):
