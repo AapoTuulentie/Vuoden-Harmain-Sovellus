@@ -65,15 +65,6 @@ Log In Should Not Work With Incorrect Credentials
     Log In
     Log In Should Fail With Message  Väärä käyttäjätunnus tai salasana 
 
-Logging Out Redirects To Main Page
-    Reset Database First
-    Go To Register Page
-    Set Username  nimi1  
-    Set Password  salasana123
-    Set Password Confirmation  salasana123
-    Submit Credentials
-    Log Out
-    Main Page Should Be Open
 
 *** Keywords ***
 Set Username
