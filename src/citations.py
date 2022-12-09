@@ -26,7 +26,7 @@ def add_citation(author, title, year, citationtype, journal):
             return True
         except:
             return False
-    
+
 def get_citations():
     if not session:
         return False
@@ -49,18 +49,18 @@ def delete_citation(id):
     except:
         return False
 
-        
+
 def form_citations_library():
     citations_library = {}
-    
+
     if session:
         citations = get_citations()
-        
+
         for citation in citations:
-            
-            if citation[0] not in citations_library.keys():               
+
+            if citation[0] not in citations_library.keys():
                 citations_library[citation[0]] = {}
-            
+
             citations_library[citation[0]]["author"] = citation[1]
             citations_library[citation[0]]["title"] = citation[2]
             citations_library[citation[0]]["publisher"] = citation[3]
@@ -149,4 +149,4 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
             db.session.commit()
         except:
             return False
-            
+
