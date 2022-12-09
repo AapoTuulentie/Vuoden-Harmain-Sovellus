@@ -1,4 +1,25 @@
 ## Sprint Backlog
+#### Sprint 3
+
+| **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
+|---|---|---|---|
+|  **Viitetyypiksi miscellaneous**    |
+|   |   |   |   |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    |
+|   |   |   |   |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    |
+|   |   |   |   |
+|  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Tägit**    |
+| Tägejä voi lisätä viitteille  |   |   |   |
+| Viitteitä voi filtteröidä tägien perusteella  |   |   |   |
+|  **Käyttöliittymän kielen voi vaihtaa**    |
+
 #### Sprint 2
 
 | **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
