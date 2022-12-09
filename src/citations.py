@@ -38,21 +38,26 @@ def delete_citation(id):
         
 def form_citations_library():
     citations_library = {}
+    
     if session:
         citations = get_citations()
+        
         for citation in citations:
+            
             if citation[0] not in citations_library.keys():
-                citations_library[0] = {}
-            citations_library[citation[0]]["author"] = citations[1]
-            citations_library[citation[0]]["title"] = citations[2]
-            citations_library[citation[0]]["publisher"] = citations[3]
-            citations_library[citation[0]]["year"] = citations[4]
-            citations_library[citation[0]]["doi"] = citations[5]
-            citations_library[citation[0]]["isbn"] = citations[6]
-            citations_library[citation[0]]["editor"] = citations[7]
-            citations_library[citation[0]]["pages"] = citations[8]
-            citations_library[citation[0]]["shorthand"] = citations[9]
-            citations_library[citation[0]]["type"] = citations[10]
+                
+                citations_library[citation[0]] = {}
+            
+            citations_library[citation[0]]["author"] = citation[1]
+            citations_library[citation[0]]["title"] = citation[2]
+            citations_library[citation[0]]["publisher"] = citation[3]
+            citations_library[citation[0]]["year"] = citation[4]
+            citations_library[citation[0]]["doi"] = citation[5]
+            citations_library[citation[0]]["isbn"] = citation[6]
+            citations_library[citation[0]]["editor"] = citation[7]
+            citations_library[citation[0]]["pages"] = citation[8]
+            citations_library[citation[0]]["shorthand"] = citation[9]
+            citations_library[citation[0]]["type"] = citation[10]
     return citations_library
 
 def form_citations_list():
@@ -61,10 +66,17 @@ def form_citations_list():
         return False
     citations = get_citations()
     for citation in citations:
-        (citation_id, author, title, publisher,
-         year, doi, isbn, editor, pages, shorthand, user_id, citationtype) = citation
-        section = [author, title, publisher, year, doi, isbn, editor, pages, shorthand]
-        citation_list.append((add_section_to_citation(section), citation_id))
+        author = citation[1]
+        title = citation[2]
+        publisher = citation[3]
+        year = citation[4]
+        doi = citation[5]
+        isbin = citation[6]
+        editor = citation[7]
+        pages = citation[8]
+        shorthand = citation[9]
+        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand]
+        citation_list.append((add_section_to_citation(section), citation[0]))
     return citation_list
 
 def add_section_to_citation(section):
