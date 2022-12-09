@@ -7,8 +7,9 @@ def add_citation(author, title, year, citationtype, journal):
     user_id = session.get("user_id")
     if citationtype == "Book":
         try:
-            sql = "INSERT INTO entries (author, title, year, user_id, citationtype) VALUES (:author, :title, :year, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype})
+            sql = "INSERT INTO entries(author, title, year, user_id, citationtype) VALUES (:author, :title, :year, :user_id, :citationtype)"
+            db.session.execute(sql, {"author":author, "title":title,
+            "year":year, "user_id":user_id, "citationtype":citationtype})
             db.session.commit()
             return True
         except:
@@ -16,12 +17,13 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Article":
         try:
             sql = "INSERT INTO entries (author, title, year, user_id, citationtype, journal) VALUES (:author, :title, :year, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            db.session.execute(sql, {"author":author, "title":title,
+            "year":year, "user_id":user_id, "citationtype":citationtype, "journal":journal})
             db.session.commit()
             return True
         except:
             return False
-    
+
 def get_citations():
     if not session:
         return False
@@ -44,18 +46,18 @@ def delete_citation(id):
     except:
         return False
 
-        
+
 def form_citations_library():
     citations_library = {}
-    
+
     if session:
         citations = get_citations()
-        
+
         for citation in citations:
-            
-            if citation[0] not in citations_library.keys():               
+
+            if citation[0] not in citations_library.keys():
                 citations_library[citation[0]] = {}
-            
+
             citations_library[citation[0]]["author"] = citation[1]
             citations_library[citation[0]]["title"] = citation[2]
             citations_library[citation[0]]["publisher"] = citation[3]
@@ -75,9 +77,10 @@ def form_citations_list():
         return False
     citations = get_citations()
     for citation in citations:
-        (citation_id, author, title, publisher, year,
-        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
-        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand, citationtype]
+        (citation_id, author, title, publisher, year, doi, isbin,
+        editor, pages, shorthand, user_id, citationtype, journal) = citation
+        section = [author, title, publisher, year, doi, isbin, editor, pages,
+        shorthand, citationtype]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
@@ -103,7 +106,7 @@ def add_section_to_citation(section):
         citation_text += f", Sivut: {section[7]}"
     if section[8] != "None" and section[8] != None:
         citation_text += f", Shorthand: {section[8]}"
-    
+
     return citation_text
 
 def get_one_citation(id):
@@ -142,4 +145,4 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
             db.session.commit()
         except:
             return False
-            
+
