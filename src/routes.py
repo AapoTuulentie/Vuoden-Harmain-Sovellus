@@ -94,12 +94,16 @@ def modify_citation(id):
 @app.route("/dlbib")
 def download_bib_file():
     if create_bibtex_from_all_citations():
-        path = "bibtex.bib"
+        username = session.get("user_name")
+        path = f"{username}.bib"
         return send_file(path, as_attachment=True)
 
 @app.route("/copybib", methods=["GET"])
+
 def display_bib():
+    username = session.get("user_name")
+
     if create_bibtex_from_all_citations():
-        with open("bibtex.bib", encoding="utf-8") as f:
+        with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
     
