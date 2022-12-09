@@ -16,11 +16,18 @@ Add and view Citation After Registering
     Submit Citation
     Output Should Contain  Herra Hakkarainen
 
-Modify Citation
+Modify Citation With Valid Inputs
     Click Muokkaa
     Modify Title  Nimi
     Click Muokkaa
     Output Should Contain  Nimi
+
+Modify Citation With Invalid Inputs
+    Click Muokkaa
+    Modify Year  NotInteger
+    Click Muokkaa
+    Output Should Not Contain  NotInteger
+
 
 Delete Citation
     Delete Citation
@@ -47,6 +54,10 @@ Click Muokkaa
 Modify Title
     [Arguments]  ${title}
     Input text  title  ${title}
+
+Modify Year
+    [Arguments]  ${year}
+    Input text  year  ${year}
     
 Go To Register Page
     Click Link  Luo uusi tunnus

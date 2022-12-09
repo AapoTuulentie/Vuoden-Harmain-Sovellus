@@ -11,10 +11,12 @@
     {% endblock %}
     {% if session.user_id %}
     <div class="container text-center">
+        <div class="d-grid gap-2 col-3 mx-auto">
         <div class="row">
             <a class="btn btn-secondary px-2 mt-3" href="/logout" role="button">Kirjaudu ulos</a>
         </div>
     </div>
+</div>
     {% endif %}
 </body>
 </html>
