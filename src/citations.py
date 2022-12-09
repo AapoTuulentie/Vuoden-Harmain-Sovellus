@@ -43,16 +43,16 @@ def form_citations_library():
         for citation in citations:
             if citation[0] not in citations_library.keys():
                 citations_library[0] = {}
-            citations_library[citation[0]]["author"] = citations[1]
-            citations_library[citation[0]]["title"] = citations[2]
-            citations_library[citation[0]]["publisher"] = citations[3]
-            citations_library[citation[0]]["year"] = citations[4]
-            citations_library[citation[0]]["doi"] = citations[5]
-            citations_library[citation[0]]["isbn"] = citations[6]
-            citations_library[citation[0]]["editor"] = citations[7]
-            citations_library[citation[0]]["pages"] = citations[8]
-            citations_library[citation[0]]["shorthand"] = citations[9]
-            citations_library[citation[0]]["type"] = citations[10]
+            citations_library[citation[0]]["author"] = citation[1]
+            citations_library[citation[0]]["title"] = citation[2]
+            citations_library[citation[0]]["publisher"] = citation[3]
+            citations_library[citation[0]]["year"] = citation[4]
+            citations_library[citation[0]]["doi"] = citation[5]
+            citations_library[citation[0]]["isbn"] = citation[6]
+            citations_library[citation[0]]["editor"] = citation[7]
+            citations_library[citation[0]]["pages"] = citation[8]
+            citations_library[citation[0]]["shorthand"] = citation[9]
+            citations_library[citation[0]]["type"] = citation[10]
     return citations_library
 
 def form_citations_list():
