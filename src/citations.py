@@ -1,22 +1,27 @@
 from db import db
+from random import choice
+from string import ascii_letters, digits
 from flask import session
+
 
 def add_citation(author, title, year, citationtype, journal):
     if not session or title == "" or not year.isdigit():
         return False
     user_id = session.get("user_id")
+    characters = ascii_letters + digits
+    shorthand = "".join(choice(characters) for i in range(8))
     if citationtype == "Book":
         try:
-            sql = "INSERT INTO entries (author, title, year, user_id, citationtype) VALUES (:author, :title, :year, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype})
+            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype})
             db.session.commit()
             return True
         except:
             return False
     if citationtype == "Article":
         try:
-            sql = "INSERT INTO entries (author, title, year, user_id, citationtype, journal) VALUES (:author, :title, :year, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype, "journal":journal})
             db.session.commit()
             return True
         except:
