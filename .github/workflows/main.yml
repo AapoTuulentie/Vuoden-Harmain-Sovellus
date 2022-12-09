@@ -72,6 +72,8 @@ jobs:
             export DISPLAY=:99
             chromedriver --url-base=/wd/hub &
             sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+      - name: lint
+        run: poetry run pylint src/
       - name: Run robot tests
         run:
 
