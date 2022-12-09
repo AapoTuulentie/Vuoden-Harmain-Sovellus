@@ -38,11 +38,15 @@ def delete_citation(id):
         
 def form_citations_library():
     citations_library = {}
+    
     if session:
         citations = get_citations()
+        
         for citation in citations:
-            if citation[0] not in citations_library.keys():
-                citations_library[0] = {}
+            
+            if citation[0] not in citations_library.keys():               
+                citations_library[citation[0]] = {}
+            
             citations_library[citation[0]]["author"] = citation[1]
             citations_library[citation[0]]["title"] = citation[2]
             citations_library[citation[0]]["publisher"] = citation[3]
@@ -61,10 +65,17 @@ def form_citations_list():
         return False
     citations = get_citations()
     for citation in citations:
-        (citation_id, author, title, publisher,
-         year, doi, isbn, editor, pages, shorthand, user_id, citationtype) = citation
-        section = [author, title, publisher, year, doi, isbn, editor, pages, shorthand]
-        citation_list.append((add_section_to_citation(section), citation_id))
+        author = citation[1]
+        title = citation[2]
+        publisher = citation[3]
+        year = citation[4]
+        doi = citation[5]
+        isbin = citation[6]
+        editor = citation[7]
+        pages = citation[8]
+        shorthand = citation[9]
+        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand]
+        citation_list.append((add_section_to_citation(section), citation[0]))
     return citation_list
 
 def add_section_to_citation(section):
