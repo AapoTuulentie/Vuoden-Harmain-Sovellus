@@ -7,6 +7,7 @@
 |Tiedosto yhdestä viitteestä   | Jaakko  | Hieman kesken, testaamatta  | 30 min |
 |Tiedoston voi ladata tai kopioida  | Jenni  | Testaamatta  | 10min |
 |  **Käyttäjä voi luoda viitteen haluamastaan lähdetyypistä (artikkeli jne.)**    |
+| Käyttäjä voi valita kirjan tai artikkelin väliltä  | Jenni   | Aloitettu  | 15min   |
 |  **Käyttäjä voi muokata tallentamiaan viitteitä**  
 |Viitteen vieressä nappi, joka vie muutos sivulle | Eero | Valmis | |
 | Muutos sivulla lomake, joissa default arvoina viitteen nykyiset tiedot | Eero | Valmis | |
