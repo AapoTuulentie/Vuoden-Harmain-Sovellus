@@ -58,7 +58,9 @@ def add_citation():
     title = request.form["title"]
     author = request.form["author"]
     year = request.form["year"]
-    if not citations.add_citation(author, title, year):
+    citationtype = request.form["citationtype"]
+    journal = request.form["journal"]
+    if not citations.add_citation(author, title, year, citationtype, journal):
         return render_template("errors.html", error="Ei onnistunut")
     return redirect(request.referrer)
 
