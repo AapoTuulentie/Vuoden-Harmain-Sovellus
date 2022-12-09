@@ -25,7 +25,7 @@ def get_all_citations():
 
 def create_bibtex_from_all_citations():
     username = session.get("user_name")
-    
+
     all_citations = get_all_citations()
     bibtex_string = ""
     try:
@@ -40,7 +40,7 @@ def create_bibtex_from_all_citations():
         bibtex.write(bibtex_string)
         bibtex.close()
     except:
-        return False        
+        return False
     return True
 
 def create_bibtex_from_one_citation(id):
@@ -60,7 +60,7 @@ def create_bibtex_from_one_citation(id):
         bibtex.write(bibtex_string)
         bibtex.close()
     except:
-        return False        
-    return True   
+        return False
+    return True
 
 ()
