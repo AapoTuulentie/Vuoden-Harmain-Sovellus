@@ -36,6 +36,7 @@
 | Uudet arvot tallentuvat tietokantaan | Eero | Valmis | |
 |  **Käyttäjä voi poistaa viitteen**    | Aapo | Valmis |  |
 |  **Testitietokanta kuntoon**    | Sauli  | Valmis jollain tavalla|  |
+|  **Robot testit toimimaan actionssissa**    | Sauli  | Valmis |  |
 |  **Fly.io toimimaan (ehkä)**    |
 | **Sovelluksella on alustava graafinen käyttöliittymä**  |   |   |  |
 #### Sprint 1
@@ -51,10 +52,10 @@
 |Salasanan pitää olla yli 8 merkkiä   | Eero  | Testauksessa  | 15 min  |
 | Käyttäjätunnuksen pitää olla yli 3 merkkiä  | Eero  | Testaukessa  | 15 min | 
 |   |   |   |   | 
-| **Käyttäjä voi lisätä viitteen** | Sauli | Testaus puuttuu ↓ | 10 min |
-| Käyttäjä voi katsella viitteitään | Sauli  |   | 5 min |
-|Tieto tallentuu tietokantaan  | Sauli |   |   | 10 min |
-|Käyttäjä voi lisätä kirjan, jossa kirjoittaja ja vuosi   | Sauli |   |   | 10 min |
+| **Käyttäjä voi lisätä viitteen** | Sauli | Valmis |  |
+| Käyttäjä voi katsella viitteitään | Sauli  | Valmis |  |
+|Tieto tallentuu tietokantaan  | Sauli | Valmis |   |  |
+|Käyttäjä voi lisätä kirjan, jossa kirjoittaja ja vuosi   | Sauli | Valmis |   | 10 min |
 | **Käyttäjä voi kirjautua sovellukseen**  |   |   |   |
 | Kirjautumislomake löytyy sovelluksen etusivulta | Eero  | Valmis  |   |   |
 | Olemassaolevan tunnuksen ja siihen kuuluvan salasanan syöttämällä pääsee kirjautumaan sisään |  Eero | Testauksessa  |  15 min |
