@@ -4,7 +4,7 @@ Library  ../AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${BROWSER}  headlesschrome
+${BROWSER}  chrome
 ${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${LOGIN URL}  http://${SERVER}/login
@@ -35,3 +35,24 @@ Go To Login Page
 Go To Register Page
     Go To  ${REGISTER URL}
 
+Log Out
+    Click Link  Kirjaudu ulos
+
+Submit Credentials
+    Click Button  Luo tunnus
+
+Set Username
+    [Arguments]  ${username}
+    Input Text  username  ${username}
+
+Set Password
+    [Arguments]  ${password}
+    Input Password  password1  ${password}
+
+Set Password Main Page
+    [Arguments]  ${password}
+    Input Password  password  ${password}
+
+Set Password Confirmation
+    [Arguments]  ${password}
+    Input Password  password2  ${password}

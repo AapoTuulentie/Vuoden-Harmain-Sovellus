@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open Browser And Reset Database
 Suite Teardown  Close Browser
-Test Setup  Go To Main Page First
+Test Setup  Go To Main Page
 
 
 *** Test Cases ***
@@ -67,30 +67,6 @@ Log In Should Not Work With Incorrect Credentials
 
 
 *** Keywords ***
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password1  ${password}
-
-Set Password Main Page
-    [Arguments]  ${password}
-    Input Password  password  ${password}
-
-Set Password Confirmation
-    [Arguments]  ${password}
-    Input Password  password2  ${password}
-
-Submit Credentials
-    Click Button  Luo tunnus
-
-Go To Main Page First
-    Go To Main Page
-
-Go To Register Page
-    Click Link  Luo uusi tunnus
 
 Register Should Succeed
     Main Page Should Be Open
@@ -105,9 +81,6 @@ Register Should Fail With Message
 Login Should Fail With Message
     [Arguments]  ${message}
     Page Should Contain  ${Message}
-
-Log Out
-    Click Link  Kirjaudu ulos
 
 Log In
     Click Button  Kirjaudu
