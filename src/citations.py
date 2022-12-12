@@ -13,7 +13,14 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Book":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype
+                })
             db.session.commit()
             return True
         except:
@@ -21,7 +28,15 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Article":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype,
+                "journal":journal
+                })
             db.session.commit()
             return True
         except:
@@ -112,7 +127,7 @@ def add_section_to_citation(section):
         citation_text += f", Shorthand: {section[8]}"
     if section[10] != "None" and section[10] != None:
         citation_text += f", Journal: {section[10]}"
-    
+
     return citation_text
 
 def get_one_citation(id):
@@ -151,4 +166,3 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
             db.session.commit()
         except:
             return False
-
