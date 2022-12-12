@@ -41,9 +41,10 @@ def get_citations():
 def delete_citation(id):
     if not session:
         return False
+    user_id = session.get("user_id")
     try:
-        sql = "DELETE FROM entries WHERE id=:id"
-        db.session.execute(sql, {"id":id})
+        sql = "DELETE FROM entries WHERE id=:id AND user_id=:user_id"
+        db.session.execute(sql, {"id":id, "user_id":user_id})
         db.session.commit()
         return True
     except:
@@ -79,6 +80,7 @@ def form_citations_list():
     if not session:
         return False
     citations = get_citations()
+    user_id = session.get("user_id")
     for citation in citations:
         (citation_id, author, title, publisher, year,
         doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
