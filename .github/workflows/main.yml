@@ -9,44 +9,87 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     services:
       postgres:
-        image: postgres
+        image: postgres:latest
         env:
-          POSTGRES_DB: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres_db
+          POSTGRES_PASSWORD: postgres_password
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres_user
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        ports:
-          - 5432:5432
+
     steps:
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get install --yes postgresql-client
+
       - uses: actions/checkout@v2
+
+      - name: Find schema
+        run: cat schema.sql
+
+      - name: Read schema
+        run: psql -d postgresql://postgres_user:postgres_password@localhost:5432/postgres_db -f schema.sql
+        env:
+          PGPASSWORD: postgres_password
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+
       - name: Install Poetry
         run: pip install poetry
+
       - name: Install dependencies
         run: poetry install
 
-      - name: Install PostgreSQL client
+      - name: Create .env.test file
         run: |
-          apt-get update
-          apt-get install --yes postgresql-client
+          touch .env.test
+          echo DATABASE_URL=postgresql://postgres_user:postgres_password@localhost:5432/postgres_db >> .env.test
+          echo SECRET_KEY=cd658d476cc15a67f687760f2de8b767 >> .env.test
+          cat .env.test
 
-      - name: Setup database
-        run: psql -h postgres -U postgres_user -c 'CREATE DATABASE "postgres_db";'
+          touch .env
+          echo DATABASE_URL=postgresql://postgres_user:postgres_password@localhost:5432/postgres_db >> .env
+          echo SECRET_KEY=cd658d476cc15a67f687760f2de8b767 >> .env
+          cat .env.test
         env:
-          PGPASSWORD: postgres
-      - name: Run robot tests
-        env:
-          DATABASE_URL: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
-          #DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
-        run: poetry run robot src/tests
-      - name: pylint
+          PGPASSWORD: postgres_password
+      - name: Setup chromedriver
+        uses: nanasess/setup-chromedriver@master
+      - run: |
+            export DISPLAY=:99
+            chromedriver --url-base=/wd/hub &
+            sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+      - name: lint
         run: poetry run pylint src/
+      - name: Run robot tests
+        run:
+
+          cd src
+
+          poetry run flask run &
+
+          sleep 5
+
+          poetry run robot tests
+
+          status=$?
+
+          kill $(lsof -t -i:5000)
+
+          exit $status
+
+        env:
+          PGPASSWORD: postgres_password

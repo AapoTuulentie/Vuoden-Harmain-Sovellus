@@ -2,11 +2,11 @@
 Resource  resource.robot
 Suite Setup  Open Browser And Reset Database
 Suite Teardown  Close Browser
-Test Setup  Go To Main Page First
+Test Setup  Go To Main Page
 
 *** Test Cases ***
 
-Add and view Citation After Registering
+Add And View Citation After Registering
     Go To Register Page
     Set Username  kayttaja1
     Set Password  salasana123
@@ -14,24 +14,28 @@ Add and view Citation After Registering
     Submit Credentials
     Input Citation Info  Herra Hakkarainen  Mauri Kunnas  2001
     Submit Citation
-    Output Should Contain  Herra Hakkarainen
+    Page Should Contain  Herra Hakkarainen
+
+Cannot Add Citation With Letters As Year
+    Input Citation Info  Herra Hakkaraisen aakkoset  Mauri Kunnas  NollaNolla
+    Submit Citation
+    Page Should Not Contain  Herra Hakkaraisen aakkoset
 
 Modify Citation With Valid Inputs
-    Click Muokkaa
+    ModiFy Citation
     Modify Title  Nimi
-    Click Muokkaa
-    Output Should Contain  Nimi
+    Confirm Modification
+    Page Should Contain  Nimi
 
 Modify Citation With Invalid Inputs
-    Click Muokkaa
+    ModiFy Citation
     Modify Year  NotInteger
-    Click Muokkaa
-    Output Should Not Contain  NotInteger
-
+    Confirm Modification
+    Page Should Not Contain  NotInteger
 
 Delete Citation
     Delete Citation
-    Output Should Not Contain  Nimi
+    Page Should Not Contain  Nimi
     Log Out
 
 *** Keywords ***
@@ -48,8 +52,11 @@ Submit Citation
 Delete Citation
     Click Button  Poista
 
-Click Muokkaa
+ModiFy Citation
     Click Button  Muokkaa
+
+Confirm Modification
+    Click Button  Vahvista muokkaus
 
 Modify Title
     [Arguments]  ${title}
@@ -58,40 +65,3 @@ Modify Title
 Modify Year
     [Arguments]  ${year}
     Input text  year  ${year}
-    
-Go To Register Page
-    Click Link  Luo uusi tunnus
-
-Go To Main Page First
-    Go To Main Page
-
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password1  ${password}
-
-Set Password Main Page
-    [Arguments]  ${password}
-    Input Password  password  ${password}
-
-Set Password Confirmation
-    [Arguments]  ${password}
-    Input Password  password2  ${password}
-
-Submit Credentials
-    Click Button  Luo tunnus
-
-Output Should Contain
-    [Arguments]  ${message}
-    Page Should Contain  ${Message}
-
-Output Should Not Contain
-    [Arguments]  ${message}
-    Page Should Not Contain  ${Message}
-
-Log Out
-    Click Link  Kirjaudu ulos
-

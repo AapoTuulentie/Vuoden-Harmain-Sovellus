@@ -1,27 +1,32 @@
 from db import db
+from random import choice
+from string import ascii_letters, digits
 from flask import session
+
 
 def add_citation(author, title, year, citationtype, journal):
     if not session or title == "" or not year.isdigit():
         return False
     user_id = session.get("user_id")
+    characters = ascii_letters + digits
+    shorthand = "".join(choice(characters) for i in range(8))
     if citationtype == "Book":
         try:
-            sql = "INSERT INTO entries (author, title, year, user_id, citationtype) VALUES (:author, :title, :year, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype})
+            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype})
             db.session.commit()
             return True
         except:
             return False
     if citationtype == "Article":
         try:
-            sql = "INSERT INTO entries (author, title, year, user_id, citationtype, journal) VALUES (:author, :title, :year, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
+            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype, "journal":journal})
             db.session.commit()
             return True
         except:
             return False
-    
+
 def get_citations():
     if not session:
         return False
@@ -36,26 +41,27 @@ def get_citations():
 def delete_citation(id):
     if not session:
         return False
+    user_id = session.get("user_id")
     try:
-        sql = "DELETE FROM entries WHERE id=:id"
-        db.session.execute(sql, {"id":id})
+        sql = "DELETE FROM entries WHERE id=:id AND user_id=:user_id"
+        db.session.execute(sql, {"id":id, "user_id":user_id})
         db.session.commit()
         return True
     except:
         return False
 
-        
+
 def form_citations_library():
     citations_library = {}
-    
+
     if session:
         citations = get_citations()
-        
+
         for citation in citations:
-            
-            if citation[0] not in citations_library.keys():               
+
+            if citation[0] not in citations_library.keys():
                 citations_library[citation[0]] = {}
-            
+
             citations_library[citation[0]]["author"] = citation[1]
             citations_library[citation[0]]["title"] = citation[2]
             citations_library[citation[0]]["publisher"] = citation[3]
@@ -74,6 +80,7 @@ def form_citations_list():
     if not session:
         return False
     citations = get_citations()
+    user_id = session.get("user_id")
     for citation in citations:
         (citation_id, author, title, publisher, year,
         doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
@@ -144,4 +151,4 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
             db.session.commit()
         except:
             return False
-            
+

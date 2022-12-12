@@ -1,4 +1,25 @@
 ## Sprint Backlog
+#### Sprint 3
+
+| **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
+|---|---|---|---|
+|  **Viitetyypiksi miscellaneous**    |
+|   |   |   |   |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    |
+|   |   |   |   |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo |
+|   |   |   |   |
+|  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |   |   |   |
+|  **Tägit**    |
+| Tägejä voi lisätä viitteille  |   |   |   |
+| Viitteitä voi filtteröidä tägien perusteella  |   |   |   |
+|  **Käyttöliittymän kielen voi vaihtaa**    |
+
 #### Sprint 2
 
 | **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
@@ -15,6 +36,7 @@
 | Uudet arvot tallentuvat tietokantaan | Eero | Valmis | |
 |  **Käyttäjä voi poistaa viitteen**    | Aapo | Valmis |  |
 |  **Testitietokanta kuntoon**    | Sauli  | Valmis jollain tavalla|  |
+|  **Robot testit toimimaan actionssissa**    | Sauli  | Valmis |  |
 |  **Fly.io toimimaan (ehkä)**    |
 | **Sovelluksella on alustava graafinen käyttöliittymä**  |   |   |  |
 #### Sprint 1
@@ -30,10 +52,10 @@
 |Salasanan pitää olla yli 8 merkkiä   | Eero  | Testauksessa  | 15 min  |
 | Käyttäjätunnuksen pitää olla yli 3 merkkiä  | Eero  | Testaukessa  | 15 min | 
 |   |   |   |   | 
-| **Käyttäjä voi lisätä viitteen** | Sauli | Testaus puuttuu ↓ | 10 min |
-| Käyttäjä voi katsella viitteitään | Sauli  |   | 5 min |
-|Tieto tallentuu tietokantaan  | Sauli |   |   | 10 min |
-|Käyttäjä voi lisätä kirjan, jossa kirjoittaja ja vuosi   | Sauli |   |   | 10 min |
+| **Käyttäjä voi lisätä viitteen** | Sauli | Valmis |  |
+| Käyttäjä voi katsella viitteitään | Sauli  | Valmis |  |
+|Tieto tallentuu tietokantaan  | Sauli | Valmis |   |  |
+|Käyttäjä voi lisätä kirjan, jossa kirjoittaja ja vuosi   | Sauli | Valmis |   | 10 min |
 | **Käyttäjä voi kirjautua sovellukseen**  |   |   |   |
 | Kirjautumislomake löytyy sovelluksen etusivulta | Eero  | Valmis  |   |   |
 | Olemassaolevan tunnuksen ja siihen kuuluvan salasanan syöttämällä pääsee kirjautumaan sisään |  Eero | Testauksessa  |  15 min |
@@ -45,8 +67,6 @@
 | Uloskirjautumisnappi löytyy sovelluksen kaikilta sivuilta käyttäjän ollessa kirjautuneena | Jenni  | Done  |  |
 | Uloskirjautumisnappia painamalla käyttäjä kirjautuu ulos | Jenni  | Done  |  |
 | Uloskirjautumisen jälkeen ei pääse takaisin käyttäjän tietoihin painamalla sovelluksen "takaisin" nappia | Jenni  | Kesken  | 5min  | 
-| **Käyttäjä voi käyttää sovellusta nettiselaimella**  |   |   |
-| Sovellus toimii fly.io:ssa  |Aapo   | Kesken  |   | 
 |   |   |   |   |
 |   |   |   |   |
 |**Sovelluksella on alustava graafinen käyttöliittymä**   |   |   |   
