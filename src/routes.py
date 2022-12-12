@@ -1,8 +1,7 @@
+from os import getenv
 from app import app
 from bibtex_creator import create_bibtex_from_all_citations
-
 from flask import redirect, render_template, request, send_file, session
-from os import getenv
 import users
 import citations
 import actions
@@ -106,4 +105,4 @@ def display_bib():
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
-    
+
