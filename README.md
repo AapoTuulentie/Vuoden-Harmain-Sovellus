@@ -9,3 +9,4 @@
 
 ![GHA workflow badge](https://github.com/AapoTuulentie/Vuoden-Harmain-Sovellus/workflows/CI/badge.svg)
 
+
