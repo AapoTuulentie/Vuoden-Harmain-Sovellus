@@ -10,7 +10,8 @@
 |  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo |
 |   |   |   |   |
 |  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
-|   |   |   |   |
+| Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Työn alla  | 10 min  |
+| Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Työn alla | 1h |
 |  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
