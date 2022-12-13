@@ -64,7 +64,7 @@ def add_citation():
     journal = request.form["journal"]
     authors = citations.form_authors(author)
     if not citations.add_citation(authors, title, year, citationtype, journal):
-        return render_template("errors.html", error="Ei onnistunut")
+        return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 
 @app.route("/delete_citation", methods=["POST"])
