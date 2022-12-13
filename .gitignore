@@ -5,13 +5,9 @@ selenium-screenshot*
 
 .env
 __pycache__
-.pytest_cache
 src/__pycache__
 src/ __pycache
 tests/__pycache__
-htmlcov
-.coverage
-.coveragerc
 venv
 
 .DS_Store

@@ -38,6 +38,8 @@ def register():
                                    error="Salasanassa pitää olla vähintään 8 merkkiä")
         if len(password1) > 30:
             return render_template("errors.html", error="Salasanassa saa olla enintään 30 merkkiä")
+        if len(username) > 30:
+            return render_template("errors.html", error="Käyttäjänimessä saa olla enintään 30 merkkiä")
         users.new_user(username, password1)
         return redirect("/")
 
@@ -62,7 +64,7 @@ def add_citation():
     journal = request.form["journal"]
     authors = citations.form_authors(author)
     if not citations.add_citation(authors, title, year, citationtype, journal):
-        return render_template("errors.html", error="Ei onnistunut")
+        return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 
 @app.route("/delete_citation", methods=["POST"])
