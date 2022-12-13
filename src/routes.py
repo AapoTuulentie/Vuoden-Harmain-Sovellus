@@ -38,6 +38,8 @@ def register():
                                    error="Salasanassa pitää olla vähintään 8 merkkiä")
         if len(password1) > 30:
             return render_template("errors.html", error="Salasanassa saa olla enintään 30 merkkiä")
+        if len(username) > 30:
+            return render_template("errors.html", error="Käyttäjänimessä saa olla enintään 30 merkkiä")
         users.new_user(username, password1)
         return redirect("/")
 
