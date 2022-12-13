@@ -17,6 +17,6 @@ class AppLibrary:
         }
 
         requests.post(f"{self._base_url}/register", data=data)
-        
+
     def reset_database(self):
         requests.post(f"{self._base_url}/reset_database")

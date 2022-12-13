@@ -4,13 +4,14 @@
 | **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
 |---|---|---|---|
 |  **Viitetyypiksi miscellaneous**    |
-|   |   |   |   |
-|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    |
+| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Aloitettu  | 1h  |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Aloitettu | 5min |
 |   |   |   |   |
 |  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo |
 |   |   |   |   |
 |  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
-|   |   |   |   |
+| Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |
+| Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Testauksessa| 20 min |
 |  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
