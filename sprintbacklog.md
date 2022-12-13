@@ -17,8 +17,8 @@
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
 |  **Tägit**    |
-| Tägejä voi lisätä viitteille  |   |   |   |
-| Viitteitä voi filtteröidä tägien perusteella  |   |   |   |
+| Tägejä voi lisätä viitteille  | Sauli |   |   |
+| Viitteitä voi filtteröidä tägien perusteella  | Sauli |   |   |
 |  **Käyttöliittymän kielen voi vaihtaa**    |
 
 #### Sprint 2
