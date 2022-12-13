@@ -98,7 +98,7 @@ def form_citations_list():
     citations = get_citations()
     for citation in citations:
         (citation_id, author, title, publisher, year,
-        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
+        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal, tag) = citation
         section = [citationtype, author, title, publisher, year, doi, isbin, editor, pages, shorthand, journal]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
