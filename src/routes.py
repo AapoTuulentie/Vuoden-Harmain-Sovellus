@@ -38,6 +38,8 @@ def register():
                                    error="Salasanassa pitää olla vähintään 8 merkkiä")
         if len(password1) > 30:
             return render_template("errors.html", error="Salasanassa saa olla enintään 30 merkkiä")
+        if len(username) > 30:
+            return render_template("errors.html", error="Käyttäjänimessä saa olla enintään 30 merkkiä")
         users.new_user(username, password1)
         return redirect("/")
 
@@ -60,8 +62,9 @@ def add_citation():
     year = request.form["year"]
     citationtype = request.form["citationtype"]
     journal = request.form["journal"]
-    if not citations.add_citation(author, title, year, citationtype, journal):
-        return render_template("errors.html", error="Ei onnistunut")
+    authors = citations.form_authors(author)
+    if not citations.add_citation(authors, title, year, citationtype, journal):
+        return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 
 @app.route("/delete_citation", methods=["POST"])
@@ -117,3 +120,4 @@ def display_bib():
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
+    

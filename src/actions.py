@@ -12,4 +12,3 @@ def reset_database():
         except:
             return False
     return False
-

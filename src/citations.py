@@ -2,6 +2,7 @@ from db import db
 from random import choice
 from string import ascii_letters, digits
 from flask import session
+import re
 
 
 def add_citation(author, title, year, citationtype, journal):
@@ -13,7 +14,14 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Book":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype
+                })
             db.session.commit()
             return True
         except:
@@ -21,7 +29,15 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Article":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype,
+                "journal":journal
+                })
             db.session.commit()
             return True
         except:
@@ -80,40 +96,25 @@ def form_citations_list():
     if not session:
         return False
     citations = get_citations()
-    user_id = session.get("user_id")
     for citation in citations:
         (citation_id, author, title, publisher, year,
         doi, isbin, editor, pages, shorthand, user_id, citationtype, journal) = citation
-        section = [author, title, publisher, year, doi, isbin, editor, pages, shorthand, citationtype, journal]
+        section = [citationtype, author, title, publisher, year, doi, isbin, editor, pages, shorthand, journal]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
 def add_section_to_citation(section):
+
+    info = ["Viitteen tyyppi", "Kirjoittaja", "Otsikko", "Julkaisija",
+     "Vuosi", "Doi", "Isbn", "Editor", "Sivut", "Shorthand", "Journal"]
+
     citation_text = ""
-    if section[9] != "None" and section[9] != None:
-        citation_text += f"Viitteen tyyppi: {section[9]}, "
-    if section[0] != "None" and section[0] != None:
-        citation_text += f" Kirjoittaja: {section[0]}"
-    if section[1] != "None" and section[1] != None:
-        citation_text += f", Otsikko: {section[1]}"
-    if section[2] != "None" and section[2] != None:
-        citation_text += f", Julkaisija: {section[2]}"
-    if section[3] != "None" and section[3] != None:
-        citation_text += f", Vuosi: {section[3]}"
-    if section[4] != "None" and section[4] != None:
-        citation_text += f", Doi: {section[4]}"
-    if section[5] != "None" and section[5] != None:
-        citation_text += f", Isbin: {section[5]}"
-    if section[6] != "None" and section[6] != None:
-        citation_text += f", Editor: {section[6]}"
-    if section[7] != "None" and section[7] != None:
-        citation_text += f", Sivut: {section[7]}"
-    if section[8] != "None" and section[8] != None:
-        citation_text += f", Shorthand: {section[8]}"
-    if section[10] != "None" and section[10] != None:
-        citation_text += f", Journal: {section[10]}"
+
+    for x in range(11):
+        if section[x] != "None" and section[x] != None:
+            citation_text += f"{info[x]}: {section[x]}, "
     
-    return citation_text
+    return citation_text[:-2]
 
 def get_one_citation(id):
     if not session:
@@ -138,13 +139,14 @@ def check_correct_user(id):
 def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand):
     if not session:
         return False
+    authors = form_authors(author)
     if check_correct_user(id) == session.get("user_id"):
         try:
             sql = """UPDATE entries SET author=:author, title=:title,
             publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
             pages=:pages, shorthand=:shorthand WHERE id=:id"""
 
-            db.session.execute(sql, {"id":id, "author":author, "title":title,
+            db.session.execute(sql, {"id":id, "author":authors, "title":title,
             "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
             "editor":editor, "pages":pages, "shorthand":shorthand})
 
@@ -152,3 +154,24 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
         except:
             return False
 
+def form_authors(author):
+    full_names = arrange_authors(author)
+    result = ""
+    for i in range(0, len(full_names)):
+        for j in range(0, len(full_names[i])):
+            if j == len(full_names[i])-1 and i != len(full_names)-1:
+                result += f"{full_names[i][j]}, "
+            elif i == len(full_names)-1 and j == len(full_names[i])-1:
+                result += f"{full_names[i][j]}"
+            else:
+                result += f"{full_names[i][j]} "
+    return result
+
+def arrange_authors(author):
+    authors = re.split(r"\s*;\s*|\s*,\s*", author)
+    full_names = []
+    for author in authors:
+        names = author.split(" ")
+        full_names.append(names)
+    full_names.sort(key=lambda s: s[len(s)-1].lower())
+    return full_names
