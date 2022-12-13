@@ -48,20 +48,23 @@
 </form>
 <br>
 <p style="font-size:26px">Viitteesi</p>
-<div>
     {% for citation in citations %}
+
     {{citation[0]}}
     <form action="/delete_citation" method="POST">
-        
         <input type="hidden" name="id" value="{{ citation[1] }}">
         <input type="submit" value="Poista">
     </form>
     <form action="/modify_citation/{{ citation[1] }}" method="GET">
         <input type="submit" value="Muokkaa">
     </form>
-    
+    <input type="checkbox" name="check" id="check" value="{{ citation[1] }}" form="checkbox">
     <hr>
     {% endfor %}
+<form action="/bib" method="POST" id="checkbox">
+    <input type="submit" value="Tarkastele valittuja viitteitä" name="nappi">
+    <input type="submit" value="Lataa valitut viitteet" name="nappi">
+</form>
 </div>
 <div class="container text-center">
     <div class="d-grid gap-2 col-3 mx-auto">

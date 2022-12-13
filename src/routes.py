@@ -1,5 +1,5 @@
 from app import app
-from bibtex_creator import create_bibtex_from_all_citations
+from bibtex_creator import create_bibtex_from_all_citations, create_bibtex_from_checked_citations
 
 from flask import redirect, render_template, request, send_file, session
 from os import getenv
@@ -91,6 +91,19 @@ def modify_citation(id):
         citations.modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
     return redirect("/")
 
+@app.route("/bib", methods=["POST", "GET"])
+def bib():
+    username = session.get("user_name")
+    id_list = request.form.getlist("check")
+    if request.form["nappi"] == "Tarkastele valittuja viitteitä":
+        if create_bibtex_from_checked_citations(id_list):
+            with open(f"{username}.bib", encoding="utf-8") as f:
+                return render_template("bibfile.html", bib=f.read())
+    if request.form["nappi"] == "Lataa valitut viitteet":
+        if create_bibtex_from_checked_citations(id_list):
+            path = f"{username}.bib"
+            return send_file(path, as_attachment=True)
+
 @app.route("/dlbib")
 def download_bib_file():
     if create_bibtex_from_all_citations():
@@ -99,11 +112,8 @@ def download_bib_file():
         return send_file(path, as_attachment=True)
 
 @app.route("/copybib", methods=["GET"])
-
 def display_bib():
     username = session.get("user_name")
-
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
-    

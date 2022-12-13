@@ -1,4 +1,4 @@
-from citations import form_citations_library
+from citations import form_citations_library, get_one_citation, get_citations
 from flask import session
 #This is as name implies for manual testing purposes,
 #Will get deleted when proper tests are made
@@ -63,4 +63,24 @@ def create_bibtex_from_one_citation(id):
         return False
     return True
 
-()
+def create_bibtex_from_checked_citations(id_list):
+    username = session.get("user_name")
+    all_citations = get_all_citations()
+    bibtex_string = ""
+
+    try:
+        for id in id_list:
+            citation = all_citations[int(id)]
+            bibtex_string += (f'@{citation["type"]}\u007b{citation["shorthand"]},\n')
+            for key in citation.keys():
+                if key not in ["type", "shorthand", "user_id"]:
+                    if citation[key]:
+                        bibtex_string +=(f'{key} = "{citation[key]}",\n')
+            bibtex_string += "}\n"
+            print(bibtex_string)
+        bibtex = open(f"{username}.bib", "w")
+        bibtex.write(bibtex_string)
+        bibtex.close()
+    except:
+        return False
+    return True
