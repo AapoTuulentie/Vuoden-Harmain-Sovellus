@@ -2,6 +2,7 @@ from db import db
 from random import choice
 from string import ascii_letters, digits
 from flask import session
+import re
 
 
 def add_citation(author, title, year, citationtype, journal):
@@ -13,7 +14,14 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Book":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype
+                })
             db.session.commit()
             return True
         except:
@@ -21,7 +29,15 @@ def add_citation(author, title, year, citationtype, journal):
     if citationtype == "Article":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
-            db.session.execute(sql, {"author":author, "title":title, "year":year, "shorthand":shorthand, "user_id":user_id, "citationtype":citationtype, "journal":journal})
+            db.session.execute(sql, {
+                "author":author,
+                "title":title,
+                "year":year,
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":citationtype,
+                "journal":journal
+                })
             db.session.commit()
             return True
         except:
@@ -123,17 +139,41 @@ def check_correct_user(id):
 def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand):
     if not session:
         return False
+    authors = form_authors(author)
     if check_correct_user(id) == session.get("user_id"):
         try:
             sql = """UPDATE entries SET author=:author, title=:title,
             publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
             pages=:pages, shorthand=:shorthand WHERE id=:id"""
 
-            db.session.execute(sql, {"id":id, "author":author, "title":title,
+            db.session.execute(sql, {"id":id, "author":authors, "title":title,
             "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
             "editor":editor, "pages":pages, "shorthand":shorthand})
 
             db.session.commit()
         except:
             return False
+
+def form_authors(author):
+    full_names = arrange_authors(author)
+    result = ""
+    for i in range(0, len(full_names)):
+        for j in range(0, len(full_names[i])):
+            if j == len(full_names[i])-1 and i != len(full_names)-1:
+                result += f"{full_names[i][j]}, "
+            elif i == len(full_names)-1 and j == len(full_names[i])-1:
+                result += f"{full_names[i][j]}"
+            else:
+                result += f"{full_names[i][j]} "
+    return result
+
+def arrange_authors(author):
+    authors = re.split(r"\s*;\s*|\s*,\s*", author)
+    full_names = []
+    for author in authors:
+        names = author.split(" ")
+        full_names.append(names)
+    full_names.sort(key=lambda s: s[len(s)-1].lower())
+    return full_names
+
 

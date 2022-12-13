@@ -35,7 +35,7 @@ def create_bibtex_from_all_citations():
                 if key not in ["type", "shorthand", "user_id"]:
                     if citation[key]:
                         bibtex_string +=(f'{key} = "{citation[key]}",\n')
-            bibtex_string += "}\n"    
+            bibtex_string += "}\n"
         bibtex = open(f"{username}.bib", "w")
         bibtex.write(bibtex_string)
         bibtex.close()
@@ -47,7 +47,7 @@ def create_bibtex_from_one_citation(id):
     all_citations = get_all_citations()
     username = session.get("user_name")
 
-    try:    
+    try:
         citation = all_citations[id]
 
         bibtex_string = (f'@{citation["type"]}\u007b{citation["shorthand"]},\n')
@@ -55,12 +55,10 @@ def create_bibtex_from_one_citation(id):
             if key not in ["type", "shorthand"]:
                 if citation[key]:
                     bibtex_string +=(f'{key} = "{citation[key]}",\n')
-        bibtex_string += "}\n"    
+        bibtex_string += "}\n"
         bibtex = open(f'{username}_{citation["shorthand"]}.bib', "w")
         bibtex.write(bibtex_string)
         bibtex.close()
     except:
         return False
     return True
-
-()

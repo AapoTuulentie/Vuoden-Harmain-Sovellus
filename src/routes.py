@@ -60,7 +60,8 @@ def add_citation():
     year = request.form["year"]
     citationtype = request.form["citationtype"]
     journal = request.form["journal"]
-    if not citations.add_citation(author, title, year, citationtype, journal):
+    authors = citations.form_authors(author)
+    if not citations.add_citation(authors, title, year, citationtype, journal):
         return render_template("errors.html", error="Ei onnistunut")
     return redirect(request.referrer)
 
@@ -106,4 +107,3 @@ def display_bib():
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
-    
