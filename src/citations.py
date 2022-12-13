@@ -190,5 +190,3 @@ def arrange_authors(author):
         full_names.append(names)
     full_names.sort(key=lambda s: s[len(s)-1].lower())
     return full_names
-
-
