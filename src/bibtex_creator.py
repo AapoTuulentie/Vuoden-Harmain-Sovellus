@@ -62,7 +62,6 @@ def create_bibtex_from_one_citation(id):
     except:
         return False
     return True
-<<<<<<< HEAD
 
 def create_bibtex_from_checked_citations(id_list):
     username = session.get("user_name")
@@ -78,12 +77,9 @@ def create_bibtex_from_checked_citations(id_list):
                     if citation[key]:
                         bibtex_string +=(f'{key} = "{citation[key]}",\n')
             bibtex_string += "}\n"
-            print(bibtex_string)
         bibtex = open(f"{username}.bib", "w")
         bibtex.write(bibtex_string)
         bibtex.close()
     except:
         return False
     return True
-=======
->>>>>>> 98e9cb7f7081655378da30f8973f151e192a60c4
