@@ -48,7 +48,7 @@ def get_citations():
         return False
     user_id = session.get("user_id")
     try:
-        sql = "SELECT * FROM entries WHERE user_id=:user_id"
+        sql = "SELECT * FROM entries WHERE user_id=:user_id ORDER BY author ASC"
         result = db.session.execute(sql, {"user_id":user_id})
         return result.fetchall()
     except:
@@ -66,13 +66,11 @@ def delete_citation(id):
     except:
         return False
 
-
 def form_citations_library():
     citations_library = {}
 
     if session:
         citations = get_citations()
-
         for citation in citations:
 
             if citation[0] not in citations_library.keys():
@@ -90,6 +88,8 @@ def form_citations_library():
             citations_library[citation[0]]["type"] = citation[11]
             citations_library[citation[0]]["journal"] = citation[12]
     return citations_library
+
+    
 
 def form_citations_list():
     citation_list = []
