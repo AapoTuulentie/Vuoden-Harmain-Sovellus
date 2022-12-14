@@ -1,4 +1,4 @@
- from db import db
+from db import db
 from flask import session
 
 def new_tag(tag):

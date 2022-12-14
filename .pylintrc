@@ -75,8 +75,18 @@ disable=raw-checker-failed,
         wrong-import-order,
         unused-import,
         import-outside-toplevel,
-        wrong-import-position
-
+        wrong-import-position,
+	missing-timeout,
+	invalid-name,
+	inconsistent-return-statements,
+	bare-except,
+	no-member,
+	unspecified-encoding,
+	consider-iterating-dictionary,
+	too-many-locals,
+	consider-using-enumerate,
+	consider-using-with
+	
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
 # multiple time (only on the command line, not in the configuration file where
