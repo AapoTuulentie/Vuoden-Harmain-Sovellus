@@ -7,7 +7,7 @@
 | **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Aloitettu  | 1h  |
 |  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Aloitettu | 5min |
 |   |   |   |   |
-|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo | Testauksessa
 |   |   |   |   |
 |  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
 | Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |
@@ -17,8 +17,8 @@
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
 |  **Tägit**    |
-| Tägejä voi lisätä viitteille  |   |   |   |
-| Viitteitä voi filtteröidä tägien perusteella  |   |   |   |
+| Tägejä voi lisätä viitteille  | Sauli |   |   |
+| Viitteitä voi filtteröidä tägien perusteella  | Sauli |   |   |
 |  **Käyttöliittymän kielen voi vaihtaa**    |
 
 #### Sprint 2

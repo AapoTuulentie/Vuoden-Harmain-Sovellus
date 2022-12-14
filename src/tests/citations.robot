@@ -21,6 +21,27 @@ Cannot Add Citation With Letters As Year
     Submit Citation
     Page Should Not Contain  Herra Hakkaraisen aakkoset
 
+Two Authors Are Arranged Correctly When New Citation Added
+    Input Citation Info  Herra Hakkarainen2  Sauli Niinistö;Mauri Kunnas  2001
+    Submit Citation
+    Page Should Contain  Mauri Kunnas, Sauli Niinistö
+    Delete Citation
+
+Multiple Authors Are Arranged Correctly When New Citation Added
+    Input Citation Info  Herra Hakkarainen3  Sauli Niinistö;Mauri Kunnas;Mato matala  2001
+    Submit Citation
+    Page Should Contain  Mauri Kunnas, Mato matala, Sauli Niinistö
+    Delete Citation
+
+Multiple Authors Are Arranged Correctly When Citation Modified
+    Input Citation Info  Herra Hakkarainen3  Sauli Niinistö;Mauri Kunnas  2001
+    Submit Citation
+    Modify Citation  
+    Modify Authors  Sauli Niinistö;Mauri Kunnas;Mato matala
+    Confirm Modification
+    Page Should Contain  Mauri Kunnas, Mato matala, Sauli Niinistö
+    Delete Citation
+
 Modify Citation With Valid Inputs
     ModiFy Citation
     Modify Title  Nimi
@@ -61,6 +82,10 @@ Confirm Modification
 Modify Title
     [Arguments]  ${title}
     Input text  title  ${title}
+
+Modify Authors
+    [Arguments]  ${authors}
+    Input text  author  ${authors}
 
 Modify Year
     [Arguments]  ${year}

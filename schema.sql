@@ -22,12 +22,12 @@ CREATE TABLE entries (
     shorthand TEXT,
     user_id INTEGER REFERENCES users ON DELETE CASCADE,
     citationtype TEXT,
-    journal TEXT
+    journal TEXT,
+    tag TEXT
 );
 
 CREATE TABLE tags (
     id SERIAL PRIMARY KEY,
-    entry_id INTEGER REFERENCES entries ON DELETE CASCADE,
     user_id INTEGER REFERENCES users ON DELETE CASCADE,
     tag TEXT
 );
