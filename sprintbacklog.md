@@ -13,7 +13,7 @@
 | Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |
 | Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Testauksessa| 20 min |
 |  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
-|   |   |   |   |
+|   | Jaakko  | aloitettu  | 2 |
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
 |   |   |   |   |
 |  **Tägit**    |
