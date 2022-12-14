@@ -23,43 +23,128 @@
 {% endif %}
 <br>
 {% if session.user_id %}
-<div class="container">
-    <div class="row justify-content-center">
+<p style="font-size:20px">Uusi viite</p>
+<div class="container-fluid">
+    <div class="row justify-content-start row-cols-auto">
         <div class="col">
-            <label for="citationtype">Valitse viitetyyppi</label>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#citebook">
+                Kirja
+            </button>
         </div>
         <div class="col">
-            <select class="form-select" aria-label="choosetype">
-                <option value="Book">Kirja</option>
-                <option value="Article">Artikkeli</option>
-                <option value="Misc">Sekalainen</option>
-            </select>
+            <div class="collapse collapse-horizontal" id="citebook">
+                <div class="card card-body">
+                    <form action="/add_citation" method="POST">
+                        <input type="hidden" name="citationtype" value="Book">
+                        <div class="row row-cols-auto">
+                            <div class="col">
+                                <label>Otsikko:</label>
+                                <input type="text" name="title">
+                            </div>
+                            <div class="col">
+                                <label>Kirjoittaja(t), erota kirjoittajat pilkulla: </label>
+                                <input type="text" name="author">
+                            </div>
+                            <div class="col">
+                                <label>Vuosi: </label>
+                                <input type="number" name="year">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-start row-cols-auto">
+        <div class="col">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#citearticle">
+                Artikkeli
+            </button>
+        </div>
+        <div class="col">
+            <div class="collapse collapse-horizontal" id="citearticle">
+                <div class="card card-body">
+                    <form action="/add_citation" method="POST">
+                        <input type="hidden" name="citationtype" value="Article">
+
+                        <div class="row row-cols-auto">
+                            <div class="col">
+                                <label>Otsikko:</label>
+                                <input type="text" name="title">
+                            </div>
+                            <div class="col">
+                                <label>Kirjoittaja(t), erota kirjoittajat pilkulla: </label>
+                                <input type="text" name="author">
+                            </div>
+                        </div>
+    
+                        <div class="row row-cols-auto justify-content-center">
+                            <div class="col">
+                                <label>Vuosi: </label>
+                                <input type="number" name="year">
+                            </div>
+                            <div class="col">
+                                <label>Julkaisu:</label>
+                                <input type="text" name="journal">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-start row-cols-auto">
+        <div class="col">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#citemisc">
+                Sekalainen
+            </button>
+        </div>
+        <div class="col">
+            <div class="collapse collapse-horizontal" id="citemisc">
+                <div class="card card-body">
+                    <form action="/add_citation" method="POST">
+                        <input type="hidden" name="citationtype" value="Misc">
+                        <div class="row row-cols-auto">
+                            <div class="col">
+                                <label>Otsikko:</label>
+                                <input type="text" name="title">
+                            </div>
+                            <div class="col">
+                                <label>Kirjoittaja(t), erota kirjoittajat pilkulla: </label>
+                                <input type="text" name="author">
+                            </div>
+                            <div class="col">
+                                <label>Vuosi: </label>
+                                <input type="number" name="year">
+                            </div>
+                        </div>
+                        <div class="row row-cols-auto">
+                            <div class="col">
+                                <label>Julkaisutapa (esim. url): </label>
+                                <input type="text" name="howpublished">
+                            </div>
+                            <div class="col">
+                                <label>Huomioita: </label>
+                                <input type="text" name="note">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<form action="/add_citation" method="POST">
-    <p style="font-size:20px">Uusi viite</p>
 
-    <label for="citationtype">Viitetyyppi</label>
-    <select name="citationtype" id="citationtype">
-        <option value="Book">Kirja</option>
-        <option value="Article">Artikkeli</option>
-    </select>
-
-    <label>Otsikko:</label>
-    <input type="text" name="title">
-
-    <label>Kirjoittaja(t), erota kirjoittajat pilkulla </label>
-    <input type="text" name="author">
-
-    <label>Vuosi: </label>
-    <input type="number" name="year">
-
-    <label>Artikkelin julkaisu:</label>
-    <input type="text" name="journal">
-
-    <input type="submit" value="Lisää viite">
-</form>
 <br>
 <p style="font-size:26px">Viitteesi</p>
     {% for citation in citations %}
