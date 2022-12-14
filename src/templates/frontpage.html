@@ -23,6 +23,20 @@
 {% endif %}
 <br>
 {% if session.user_id %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <label for="citationtype">Valitse viitetyyppi</label>
+        </div>
+        <div class="col">
+            <select class="form-select" aria-label="choosetype">
+                <option value="Book">Kirja</option>
+                <option value="Article">Artikkeli</option>
+                <option value="Misc">Sekalainen</option>
+            </select>
+        </div>
+    </div>
+</div>
 <form action="/add_citation" method="POST">
     <p style="font-size:20px">Uusi viite</p>
 
