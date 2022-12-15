@@ -182,9 +182,9 @@ def modify_citation(citation_id, author, title, publisher, year, doi, isbn, edit
     try:
         sql = """UPDATE entries SET author=:author, title=:title,
         publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
-        pages=:pages, shorthand=:shorthand WHERE id=:id AND user_id=:user_id"""
+        pages=:pages, shorthand=:shorthand WHERE id=:citation_id AND user_id=:user_id"""
 
-        db.session.execute(sql, {"id":citation_id, "user_id":user_id, "author":authors, "title":title,
+        db.session.execute(sql, {"citation_id":citation_id, "user_id":user_id, "author":authors, "title":title,
         "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
         "editor":editor, "pages":pages, "shorthand":shorthand})
 

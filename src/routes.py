@@ -76,7 +76,7 @@ def delete_citation():
     citations.delete_citation(citation_id)
     return redirect("/")
 
-@app.route("/modify_citation/<int:id>", methods=["GET", "POST"])
+@app.route("/modify_citation/<int:citation_id>", methods=["GET", "POST"])
 def modify_citation(citation_id):
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
