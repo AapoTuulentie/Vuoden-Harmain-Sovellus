@@ -97,7 +97,6 @@ def get_citations():
         return False
 
 def get_citations_ordred_by_type():
-    print("boom")
     if not session:
         return False
     user_id = session.get("user_id")
