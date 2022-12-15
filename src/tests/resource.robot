@@ -35,11 +35,6 @@ Go To Login Page
 Go To Register Page
     Go To  ${REGISTER URL}
 
-<<<<<<< HEAD
-Bibtex Should Contain
-    Page Should Contain  @Book{None, author = "kirjailija", title = "Otsikko", year = "1999", }
-
-=======
 Log Out
     Click Link  Kirjaudu ulos
 
@@ -61,4 +56,3 @@ Set Password Main Page
 Set Password Confirmation
     [Arguments]  ${password}
     Input Password  password2  ${password}
->>>>>>> 2540d8e4db0cacfd474ba0d068c71222ef13d98c
