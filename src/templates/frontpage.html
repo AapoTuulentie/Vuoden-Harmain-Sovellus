@@ -168,14 +168,27 @@
         <span style="font-size:20px;"><br/>Järjestetty kirjailijan mukaan</span>
         {% endif %}
 {% for tag in tags %}
-{% if loop.index0 < 4 %}
-<a href="/tag/{{tag[0]}}" id="tags" style="background-color:{{colors[loop.index0]}}">{{tag[0]}}</a>
+{% if on_tag == tag[0] %}
+    {% if loop.index0 < 4 %}
+        <a href="/tag/{{tag[0]}}" id="tags" style="background-color:{{colors[loop.index0]}}; border: solid black; filter: brightness(90%);">{{tag[0]}}</a>
+    {% else %}
+        <a href="/tag/{{tag[0]}}" id="tags" style="border: solid black; filter: brightness(90%);">{{tag[0]}}</a>
+    {% endif %}
 {% else %}
-<a href="/tag/{{tag[0]}}" id="tags" >{{tag[0]}}</a>
+    {% if loop.index0 < 4 %}
+        <a href="/tag/{{tag[0]}}" id="tags" style="background-color:{{colors[loop.index0]}}">{{tag[0]}}</a>
+    {% else %}
+        <a href="/tag/{{tag[0]}}" id="tags" >{{tag[0]}}</a>
+    {% endif %}
 {% endif %}
 {% endfor %}
 <br>
+{% if on_tag %}
+<a href="/tag_citations/{{on_tag}}" id="add_for_tag" >Lisää viitteitä tunnisteelle {{on_tag}}</a>
+
+{% endif %}
 <br>
+
 {% for citation in citations %}
 
 {{citation[0]}}

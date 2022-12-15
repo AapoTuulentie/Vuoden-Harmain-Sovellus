@@ -142,7 +142,7 @@ def new_tag():
 def citations_with_tag(tag):
     citations_list = citations.form_citations_list(tag)
     colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
-    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors, on_tag=tag)
 
 
 @app.route("/dlbib")

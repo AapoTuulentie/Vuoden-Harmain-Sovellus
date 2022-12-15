@@ -62,3 +62,14 @@ input[type="submit"] {
   background-color: white;
   border: 1px solid;
 }
+
+#add_for_tag {
+    text-decoration: none;
+    margin: 20px;
+    display:inline-block;
+    border-radius: 6px;
+    border: 2px;
+    background-color: grey;
+    color: white;
+    padding: 5px;
+}
