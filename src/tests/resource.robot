@@ -35,6 +35,9 @@ Go To Login Page
 Go To Register Page
     Go To  ${REGISTER URL}
 
+Bibtex Should Contain
+    Page Should Contain  @Book{None, author = "kirjailija", title = "Otsikko", year = "1999", }
+
 Log Out
     Click Link  Kirjaudu ulos
 

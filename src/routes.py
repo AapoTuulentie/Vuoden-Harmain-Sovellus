@@ -1,18 +1,19 @@
 from app import app
 from bibtex_creator import create_bibtex_from_all_citations, create_bibtex_from_checked_citations
-
 from flask import redirect, render_template, request, send_file, session
 from os import getenv
 import users
 import citations
 import actions
+import tags
 
 app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
     citations_list = citations.form_citations_list()
-    return render_template("frontpage.html", citations=citations_list)
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -79,16 +80,16 @@ def add_citation():
 def delete_citation():
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
-    id = request.form["id"]
-    citations.delete_citation(id)
+    citation_id = request.form["id"]
+    citations.delete_citation(citation_id)
     return redirect("/")
 
-@app.route("/modify_citation/<int:id>", methods=["GET", "POST"])
-def modify_citation(id):
+@app.route("/modify_citation/<int:citation_id>", methods=["GET", "POST"])
+def modify_citation(citation_id):
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
     if request.method == "GET":
-        return render_template("modify_citation.html", citation=citations.get_one_citation(id))
+        return render_template("modify_citation.html", citation=citations.get_one_citation(citation_id))
     if request.method == "POST":
         author = request.form["author"]
         title = request.form["title"]
@@ -99,7 +100,7 @@ def modify_citation(id):
         editor = request.form["editor"]
         pages = request.form["pages"]
         shorthand = request.form["shorthand"]
-        citations.modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
+        citations.modify_citation(citation_id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
     return redirect("/")
 
 @app.route("/bib", methods=["POST", "GET"])
@@ -115,6 +116,29 @@ def bib():
             path = f"{username}.bib"
             return send_file(path, as_attachment=True)
 
+@app.route("/tag_citations/<tag>", methods=["POST", "GET"])
+def tag_citations(tag):
+    if request.method == "POST":
+        id_list = request.form.getlist("check")
+        citations.tag_citations(tag, id_list)
+        return redirect("/")
+    
+    citations_list = citations.form_citations_list()
+    return render_template("tag_citations.html", citations=citations_list ,tag=tag)
+
+@app.route("/new_tag", methods=["POST"])
+def new_tag():
+    tag = request.form["tag"]
+    tags.new_tag(tag)
+    return redirect("/tag_citations/"+tag)
+
+@app.route("/tag/<tag>")
+def citations_with_tag(tag):
+    citations_list = citations.form_citations_list(tag)
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
+
+
 @app.route("/dlbib")
 def download_bib_file():
     if create_bibtex_from_all_citations():
@@ -128,4 +152,3 @@ def display_bib():
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
-    

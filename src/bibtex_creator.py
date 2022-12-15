@@ -33,7 +33,7 @@ def create_bibtex_from_all_citations():
             bibtex_string += (f'@{citation["type"]}\u007b{citation["shorthand"]},\n')
             for key in citation.keys():
                 if key not in ["type", "shorthand", "user_id"]:
-                    if citation[key]:
+                    if citation[key] and citation[key] != "None":
                         bibtex_string +=(f'{key} = "{citation[key]}",\n')
             bibtex_string += "}\n"
         bibtex = open(f"{username}.bib", "w")
@@ -43,12 +43,12 @@ def create_bibtex_from_all_citations():
         return False
     return True
 
-def create_bibtex_from_one_citation(id):
+def create_bibtex_from_one_citation(citation_id):
     all_citations = get_all_citations()
     username = session.get("user_name")
 
     try:
-        citation = all_citations[id]
+        citation = all_citations[citation_id]
 
         bibtex_string = (f'@{citation["type"]}\u007b{citation["shorthand"]},\n')
         for key in citation.keys():
@@ -69,8 +69,8 @@ def create_bibtex_from_checked_citations(id_list):
     bibtex_string = ""
 
     try:
-        for id in id_list:
-            citation = all_citations[int(id)]
+        for one_id in id_list:
+            citation = all_citations[int(one_id)]
             bibtex_string += (f'@{citation["type"]}\u007b{citation["shorthand"]},\n')
             for key in citation.keys():
                 if key not in ["type", "shorthand", "user_id"]:
