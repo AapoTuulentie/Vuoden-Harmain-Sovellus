@@ -70,6 +70,7 @@ def add_citation():
     authors = citations.form_authors(request.form["author"])
     fields["authors"] = authors
     fields["year"] = request.form["year"]
+    fields["shorthand"] = request.form["citekey"]
 
     if fields["citationtype"] == "Article":
         fields["journal"] = request.form["journal"]
