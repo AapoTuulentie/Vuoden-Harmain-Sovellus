@@ -129,7 +129,7 @@ def modify_citation(citation_id):
 def bib():
     username = session.get("user_name")
     id_list = request.form.getlist("check")
-    if request.form["nappi"] == "Tarkastele valittujen viitteiden bib-tiedostoa:"
+    if request.form["nappi"] == "Tarkastele valittujen viitteiden bib-tiedostoa:":
         if create_bibtex_from_checked_citations(id_list):
             with open(f"{username}.bib", encoding="utf-8") as f:
                 return render_template("bibfile.html", bib=f.read())
