@@ -25,7 +25,7 @@
 {% if session.user_id %}
 <p style="font-size:20px">Uusi viite</p>
 <div class="container-fluid">
-    <div class="row justify-content-start row-cols-auto">
+    <div class="row justify-content-start row-cols-auto mb-2">
         <div class="col">
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#citebook">
                 Kirja
@@ -50,7 +50,7 @@
                                 <input type="number" name="year">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                                <button type="submit" class="btn btn-light btn-outline-dark">Lisää viite</button>
                             </div>
                         </div>
                     </form>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-start row-cols-auto">
+    <div class="row justify-content-start row-cols-auto mb-2">
         <div class="col">
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#citearticle">
                 Artikkeli
@@ -70,7 +70,7 @@
                     <form action="/add_citation" method="POST">
                         <input type="hidden" name="citationtype" value="Article">
 
-                        <div class="row row-cols-auto">
+                        <div class="row row-cols-auto mb-1">
                             <div class="col">
                                 <label>Otsikko:</label>
                                 <input type="text" name="title">
@@ -91,7 +91,7 @@
                                 <input type="text" name="journal">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                                <button type="submit" class="btn btn-light btn-outline-dark">Lisää viite</button>
                             </div>
                         </div>
                         
@@ -111,7 +111,7 @@
                 <div class="card card-body">
                     <form action="/add_citation" method="POST">
                         <input type="hidden" name="citationtype" value="Misc">
-                        <div class="row row-cols-auto">
+                        <div class="row row-cols-auto mb-1">
                             <div class="col">
                                 <label>Otsikko:</label>
                                 <input type="text" name="title">
@@ -135,7 +135,7 @@
                                 <input type="text" name="note">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-light">Lisää viite</button>
+                                <button type="submit" class="btn btn-light btn-outline-dark">Lisää viite</button>
                             </div>
                         </div>
                     </form>

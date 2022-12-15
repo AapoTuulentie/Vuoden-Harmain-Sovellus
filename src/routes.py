@@ -57,13 +57,21 @@ def reset_database():
 def add_citation():
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
-    title = request.form["title"]
-    author = request.form["author"]
-    year = request.form["year"]
-    citationtype = request.form["citationtype"]
-    journal = request.form["journal"]
-    authors = citations.form_authors(author)
-    if not citations.add_citation(authors, title, year, citationtype, journal):
+    fields = {}
+    fields["citationtype"] = request.form["citationtype"]
+    fields["title"] = request.form["title"]
+    authors = citations.form_authors(request.form["author"])
+    fields["authors"] = authors
+    fields["year"] = request.form["year"]
+
+    if fields["citationtype"] == "Article":
+        fields["journal"] = request.form["journal"]
+    
+    if fields["citationtype"] == "Misc":
+        fields["howpublished"] = request.form["howpublished"]
+        fields["note"] = request.form["note"]
+        
+    if not citations.add_citation(fields):
         return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 

@@ -5,44 +5,62 @@ from flask import session
 import re
 
 
-def add_citation(author, title, year, citationtype, journal):
-    if not session or title == "" or not year.isdigit():
+def add_citation(fields):
+    if not session or fields["title"] == "" or not fields["year"].isdigit():
         return False
     user_id = session.get("user_id")
     characters = ascii_letters + digits
     shorthand = "".join(choice(characters) for i in range(8))
-    if citationtype == "Book":
+    if fields["citationtype"] == "Book":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
             db.session.execute(sql, {
-                "author":author,
-                "title":title,
-                "year":year,
+                "author":fields["authors"],
+                "title":fields["title"],
+                "year":fields["year"],
                 "shorthand":shorthand,
                 "user_id":user_id,
-                "citationtype":citationtype
+                "citationtype":fields["citationtype"]
                 })
             db.session.commit()
             return True
         except:
             return False
-    if citationtype == "Article":
+    if fields["citationtype"] == "Article":
         try:
             sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
             db.session.execute(sql, {
-                "author":author,
-                "title":title,
-                "year":year,
+                "author":fields["authors"],
+                "title":fields["title"],
+                "year":fields["year"],
                 "shorthand":shorthand,
                 "user_id":user_id,
-                "citationtype":citationtype,
-                "journal":journal
+                "citationtype":fields["citationtype"],
+                "journal":fields["journal"]
+                })
+            db.session.commit()
+            return True
+        except:
+            return False
+    if fields["citationtype"] == "Misc":
+        try:
+            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, howpublished, note) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :howpublished, :note)"
+            db.session.execute(sql, {
+                "author":fields["authors"],
+                "title":fields["title"],
+                "year":fields["year"],
+                "shorthand":shorthand,
+                "user_id":user_id,
+                "citationtype":fields["citationtype"],
+                "howpublished":fields["howpublished"],
+                "note":fields["note"]
                 })
             db.session.commit()
             return True
         except:
             return False
 
+            
 def get_citations():
     if not session:
         return False
@@ -89,6 +107,8 @@ def form_citations_library():
             citations_library[citation[0]]["shorthand"] = citation[9]
             citations_library[citation[0]]["type"] = citation[11]
             citations_library[citation[0]]["journal"] = citation[12]
+            citations_library[citation[0]]["howpublished"] = citation[14]
+            citations_library[citation[0]]["note"] = citation[15]
     return citations_library
 
 def form_citations_list():
@@ -98,8 +118,8 @@ def form_citations_list():
     citations = get_citations()
     for citation in citations:
         (citation_id, author, title, publisher, year,
-        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal, tag) = citation
-        section = [citationtype, author, title, publisher, year, doi, isbin, editor, pages, shorthand, journal]
+        doi, isbin, editor, pages, shorthand, user_id, citationtype, journal, tag, howpublished, note) = citation
+        section = [citationtype, author, title, publisher, year, doi, isbin, editor, pages, shorthand, journal, howpublished, note]
         citation_list.append((add_section_to_citation(section), citation_id))
     return citation_list
 
