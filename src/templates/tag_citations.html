@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<a href="/" style="font-size:40px">Takaisin etusivulle</a>
+<a href="/" id="add_for_tag" style="font-size:25px">Takaisin etusivulle</a>
 <br>
-<p style="font-size:26px">Valitse viitteet, joille tunniste lisätään</p>
+<p style="font-size:26px">Valitse viitteet, joille tunniste {{tag}} lisätään</p>
 <br>
 {% for citation in citations %}
 
