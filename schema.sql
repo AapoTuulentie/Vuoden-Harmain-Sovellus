@@ -23,7 +23,9 @@ CREATE TABLE entries (
     user_id INTEGER REFERENCES users ON DELETE CASCADE,
     citationtype TEXT,
     journal TEXT,
-    tag TEXT
+    tag TEXT,
+    howpublished TEXT,
+    note TEXT
 );
 
 CREATE TABLE tags (
