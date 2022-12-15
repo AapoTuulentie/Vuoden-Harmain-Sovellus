@@ -11,8 +11,14 @@ app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
+    args = request.args
     colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
-    citations_list = citations.form_citations_list()
+    if args:
+        order_by_type = args.get("order")
+        
+        citations_list = citations.form_citations_list(None, order_by_type)
+    else:
+        citations_list = citations.form_citations_list()
     return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
 
 @app.route("/login", methods=["POST"])

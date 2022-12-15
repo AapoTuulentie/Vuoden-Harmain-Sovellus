@@ -2,6 +2,7 @@
 
 #### Sprint 3
 
+<<<<<<< HEAD
 | **User story**                                                                                                       | **Tekijä** | **Status**                              | **Arvioitu työmäärä jäljellä** |
 | -------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------- | ------------------------------ |
 | **Viitetyypiksi miscellaneous**                                                                                      | Jenni      | Testit puuttuvat                        | 15min                          |
@@ -21,6 +22,27 @@
 | Tägejä voi lisätä viitteille                                                                                         | Sauli      | Muutama ominaisuus sekä testaus puuttuu | 1h                             |
 | Viitteitä voi filtteröidä tägien perusteella                                                                         | Sauli      | Testaus puuttuu                         | 15 min                         |
 | **Käyttöliittymän kielen voi vaihtaa**                                                                               |
+=======
+| **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
+|---|---|---|---|
+|  **Viitetyypiksi miscellaneous**    | Jenni | Testit puuttuvat | 15min |
+| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Valmis  |   |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Valmis |  |
+|   |   |   |   |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo | Testauksessa
+|   |   |   |   |
+|  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
+| Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |
+| Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Testauksessa| 20 min |
+|  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
+|   | Jaakko  | testauksessa  | 0.5h |
+|  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
+|   |  Jaakko | testauksessa  | 1h |
+|  **Tägit**    |
+| Tägejä voi lisätä viitteille  | Sauli |  Muutama ominaisuus sekä testaus puuttuu | 1h |
+| Viitteitä voi filtteröidä tägien perusteella  | Sauli | Testaus puuttuu | 15 min  |
+|  **Käyttöliittymän kielen voi vaihtaa**    |
+>>>>>>> af6852377f9358d8eca0a0bfe1bef58321990ae4
 
 #### Sprint 2
 
