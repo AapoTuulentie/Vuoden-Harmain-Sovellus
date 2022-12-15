@@ -13,7 +13,18 @@ def add_citation(author, title, year, citationtype, journal):
     shorthand = "".join(choice(characters) for i in range(8))
     if citationtype == "Book":
         try:
-            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype)"
+            sql = """INSERT INTO entries (author,
+                                        title,
+                                        year,
+                                        shorthand,
+                                        user_id,
+                                        citationtype)
+                                    VALUES (:author,
+                                            :title,
+                                            :year,
+                                            :shorthand,
+                                            :user_id,
+                                            :citationtype)"""
             db.session.execute(sql, {
                 "author":author,
                 "title":title,
@@ -28,7 +39,20 @@ def add_citation(author, title, year, citationtype, journal):
             return False
     if citationtype == "Article":
         try:
-            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, journal) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :journal)"
+            sql = """INSERT INTO entries (author,
+                                        title,
+                                        year,
+                                        shorthand,
+                                        user_id,
+                                        citationtype,
+                                        journal)
+                                VALUES (:author,
+                                        :title,
+                                        :year,
+                                        :shorthand,
+                                        :user_id,
+                                        :citationtype,
+                                        :journal)"""
             db.session.execute(sql, {
                 "author":author,
                 "title":title,
@@ -66,13 +90,13 @@ def get_citations_with_tag(tag):
         return False
 
 
-def delete_citation(id):
+def delete_citation(citation_id):
     if not session:
         return False
     user_id = session.get("user_id")
     try:
         sql = "DELETE FROM entries WHERE id=:id AND user_id=:user_id"
-        db.session.execute(sql, {"id":id, "user_id":user_id})
+        db.session.execute(sql, {"id":citation_id, "user_id":user_id})
         db.session.commit()
         return True
     except:
@@ -124,32 +148,32 @@ def add_section_to_citation(section):
     citation_text = ""
 
     for x in range(11):
-        if section[x] != "None" and section[x] != None:
+        if section[x] != "None" and section[x] is not None:
             citation_text += f"{info[x]}: {section[x]}, "
-    
+
     return citation_text[:-2]
 
-def get_one_citation(id):
+def get_one_citation(citation_id):
     if not session:
         return False
     try:
         sql = "SELECT * FROM entries WHERE id=:id"
-        result = db.session.execute(sql, {"id":id})
+        result = db.session.execute(sql, {"id":citation_id})
         return result.fetchall()[0]
     except:
         return False
 
-def check_correct_user(id):
+def check_correct_user(user_id):
     if not session:
         return False
     try:
         sql = "SELECT user_id FROM entries WHERE id=:id"
-        result = db.session.execute(sql, {"id":id})
+        result = db.session.execute(sql, {"id":user_id})
         return result.fetchone()[0]
     except:
         return False
 
-def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand):
+def modify_citation(citation_id, author, title, publisher, year, doi, isbn, editor, pages, shorthand):
     if not session:
         return False
     authors = form_authors(author)
@@ -160,7 +184,7 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
         publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
         pages=:pages, shorthand=:shorthand WHERE id=:id AND user_id=:user_id"""
 
-        db.session.execute(sql, {"id":id, "user_id":user_id, "author":authors, "title":title,
+        db.session.execute(sql, {"id":citation_id, "user_id":user_id, "author":authors, "title":title,
         "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
         "editor":editor, "pages":pages, "shorthand":shorthand})
 
@@ -184,8 +208,8 @@ def form_authors(author):
 def arrange_authors(author):
     authors = re.split(r"\s*;\s*|\s*,\s*", author)
     full_names = []
-    for author in authors:
-        names = author.split(" ")
+    for auth in authors:
+        names = auth.split(" ")
         full_names.append(names)
     full_names.sort(key=lambda s: s[len(s)-1].lower())
     return full_names

@@ -12,3 +12,14 @@ def reset_database():
         except:
             return False
     return False
+
+def build_database():
+
+    from pathlib import Path
+    try:
+        sql = Path('../schema.sql').read_text()
+        db.session.execute(sql)
+        db.session.commit()
+        return True
+    except:
+        return False
