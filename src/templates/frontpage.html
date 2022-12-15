@@ -157,6 +157,16 @@
 
 <span style="font-size:26px;">Viitteesi</span>
 <a href="/" id="tags" style="background-color:white; border: 1px solid;">Kaikki</a>
+
+
+        {% if request.args.get("order") %}
+        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/" role="button">Vaihda järjestystä</a>
+        <span style="font-size:20px;"><br/>Järjestetty tyypin mukaan</span>
+
+        {% else %}
+        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/?order=by_type" role="button">Vaihda järjestystä</a>
+        <span style="font-size:20px;"><br/>Järjestetty kirjailijan mukaan</span>
+        {% endif %}
 {% for tag in tags %}
 {% if on_tag == tag[0] %}
     {% if loop.index0 < 4 %}
@@ -201,7 +211,7 @@
 <div class="container text-center">
     <div class="d-grid gap-2 col-3 mx-auto">
         <a class="btn btn-dark" href="dlbib" role="button">Lataa bib-tiedosto</a>
-        <a class="btn btn-dark" href="copybib" target="_blank" role="button">Tarkastele bib-tiedostoa</a>
+        <a class="btn btn-dark" href="copybib" target="_blank" role="button" id="Tarkastele">Tarkastele bib-tiedostoa</a>
     </div>
 </div>
 {% endif %}
