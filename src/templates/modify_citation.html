@@ -4,22 +4,111 @@
     <h2>Muokkaa Viitettä</h2>
     </div>
 <div class="modify_citation">
-<form action="/modify_citation/{{ citation[0] }}" method="post">
     
-    Kirjoittaja(t), erota kirjoittajat pilkulla: <input type="text" name="author" value="{{citation[1]}}">
-    Otsikko: <input type="text" name="title" value="{{citation[2]}}">
-    Julkaisija: <input type="text" name="publisher" value="{{citation[3]}}">
-    Vuosi: <input type="text" name="year" value="{{citation[4]}}">
-    Doi: <input type="text" name="doi" value="{{citation[5]}}">
-    Isbn: <input type="text" name="isbn" value="{{citation[6]}}">
-    Editor: <input type="text" name="editor" value="{{citation[7]}}">
-    Sivut: <input type="text" name="pages" value="{{citation[8]}}">
-    Citekey: <input type="text" name="shorthand" value="{{citation[9]}}" readonly>
-    Tyyppi: <input type="text" name="citationtype" value="{{citation[11]}}">
-    Julkaisu: <input type="text" name="journal" value="{{citation[12]}}">
-    <input type="submit" value="Vahvista muokkaus">
-    
-</form>
+    {% if citation[11] == "Book" %}
+        <form action="/modify_citation/{{ citation[0] }}" method="post">
+            <div class="row row-cols-auto">
+                <div class="col">
+                    Kirjoittaja(t), erota kirjoittajat pilkulla: <input type="text" name="author" value="{{citation[1]}}">
+                </div>
+                <div class="col">
+                    Otsikko: <input type="text" name="title" value="{{citation[2]}}">
+                </div>
+                <div class="col">
+                    Julkaisija: <input type="text" name="publisher" value="{{citation[3]}}">
+                </div>
+                <div class="col">
+                    Vuosi: <input type="text" name="year" value="{{citation[4]}}">
+                </div>
+                <div class="col">
+                    Doi: <input type="text" name="doi" value="{{citation[5]}}">
+                </div>
+                <div class="col">
+                    Isbn: <input type="text" name="isbn" value="{{citation[6]}}">
+                </div>
+                <div class="col">
+                    Editor: <input type="text" name="editor" value="{{citation[7]}}">
+                </div>
+                <div class="col">
+                    Sivut: <input type="text" name="pages" value="{{citation[8]}}">
+                </div>
+                <div class="col">
+                    Citekey: <input type="text" name="shorthand" value="{{citation[9]}}" readonly>
+                </div>
+                <div class="col">
+                    Tyyppi: <input type="text" name="citationtype" value="{{citation[11]}}">
+                </div>
+                <div class="col">
+                    Huomioita: <input type="text" name="note" value="{{citation[15]}}">
+                </div>
+            </div>
+            <input type="submit" value="Vahvista muokkaus">
+        </form>
+    {% elif citation[11] == "Article" %}
+        <form action="/modify_citation/{{ citation[0] }}" method="post">
+            <div class="row row-cols-auto">
+                <div class="col">
+                    Kirjoittaja(t), erota kirjoittajat pilkulla: <input type="text" name="author" value="{{citation[1]}}">
+                </div>
+                <div class="col">
+                    Otsikko: <input type="text" name="title" value="{{citation[2]}}">
+                </div>
+                <div class="col">
+                    Vuosi: <input type="text" name="year" value="{{citation[4]}}">
+                </div>
+                <div class="col">
+                    Doi: <input type="text" name="doi" value="{{citation[5]}}">
+                </div>
+                <div class="col">
+                    Isbn: <input type="text" name="isbn" value="{{citation[6]}}">
+                </div>
+                <div class="col">
+                    Sivut: <input type="text" name="pages" value="{{citation[8]}}">
+                </div>
+                <div class="col">
+                    Citekey: <input type="text" name="shorthand" value="{{citation[9]}}" readonly>
+                </div>
+                <div class="col">
+                    Tyyppi: <input type="text" name="citationtype" value="{{citation[11]}}">
+                </div>
+                <div class="col">
+                    Julkaisu: <input type="text" name="journal" value="{{citation[12]}}">
+                </div>
+                <div class="col">
+                    Huomioita: <input type="text" name="note" value="{{citation[15]}}">
+                </div>
+            </div>
+            <input type="submit" value="Vahvista muokkaus">
+        </form>
+    {% else %}
+        <form action="/modify_citation/{{ citation[0] }}" method="post">
+            <div class="row row-cols-auto">
+                <div class="col">
+                    Kirjoittaja(t), erota kirjoittajat pilkulla: <input type="text" name="author" value="{{citation[1]}}">
+                </div>
+                <div class="col">
+                    Otsikko: <input type="text" name="title" value="{{citation[2]}}">
+                </div>
+                <div class="col">
+                    Vuosi: <input type="text" name="year" value="{{citation[4]}}">
+                </div>
+                <div class="col">
+                    Citekey: <input type="text" name="shorthand" value="{{citation[9]}}" readonly>
+                </div>
+                <div class="col">
+                    Tyyppi: <input type="text" name="citationtype" value="{{citation[11]}}">
+                </div>
+                <div class="col">
+                    Miten julkaistu: <input type="text" name="howpublished" value="{{citation[14]}}">
+                </div>
+                <div class="col">
+                    Huomioita: <input type="text" name="note" value="{{citation[15]}}">
+                </div>
+            </div>
+            <input type="submit" value="Vahvista muokkaus">
+        </form>    
+    {% endif %}
+        
 <p>
     <a href="/">Palaa etusivulle</a>
 </p>

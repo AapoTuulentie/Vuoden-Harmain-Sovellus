@@ -97,16 +97,31 @@ def modify_citation(citation_id):
     if request.method == "GET":
         return render_template("modify_citation.html", citation=citations.get_one_citation(citation_id))
     if request.method == "POST":
-        author = request.form["author"]
-        title = request.form["title"]
-        publisher = request.form["publisher"]
-        year = request.form["year"]
-        doi = request.form["doi"]
-        isbn = request.form["isbn"]
-        editor = request.form["editor"]
-        pages = request.form["pages"]
-        shorthand = request.form["shorthand"]
-        citations.modify_citation(citation_id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
+        fields = {}
+        fields["type"] = request.form["citationtype"]
+        fields["author"] = request.form["author"]
+        fields["title"] = request.form["title"]
+        fields["year"] = request.form["year"]
+        fields["shorthand"] = request.form["shorthand"]
+        fields["note"] = request.form["note"]
+
+        if fields["type"] == "Book":
+            fields["publisher"] = request.form["publisher"]
+            fields["doi"] = request.form["doi"]
+            fields["isbn"] = request.form["isbn"]
+            fields["pages"] = request.form["pages"]
+            fields["editor"] = request.form["editor"]
+
+        if fields["type"] == "Article":
+            fields["doi"] = request.form["doi"]
+            fields["isbn"] = request.form["isbn"]
+            fields["pages"] = request.form["pages"]
+            fields["journal"] = request.form["journal"]
+
+        if fields["type"] == "Misc":
+            fields["howpublished"] = request.form["howpublished"]
+
+        citations.modify_citation(citation_id, fields)
     return redirect("/")
 
 @app.route("/bib", methods=["POST", "GET"])
@@ -142,7 +157,7 @@ def new_tag():
 def citations_with_tag(tag):
     citations_list = citations.form_citations_list(tag)
     colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
-    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors, on_tag=tag)
 
 
 @app.route("/dlbib")
