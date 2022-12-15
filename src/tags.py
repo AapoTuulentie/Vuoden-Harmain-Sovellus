@@ -23,3 +23,4 @@ def get_tags():
         return result.fetchall()
     except:
         return False
+        

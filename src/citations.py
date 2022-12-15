@@ -68,7 +68,22 @@ def add_citation(fields):
             return False
     if fields["citationtype"] == "Misc":
         try:
-            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, howpublished, note) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :howpublished, :note)"
+            sql = """INSERT INTO entries (author,
+                                        title,
+                                        year,
+                                        shorthand,
+                                        user_id,
+                                        citationtype,
+                                        howpublished,
+                                        note)
+                                  VALUES (:author,
+                                        :title,
+                                        :year,
+                                        :shorthand,
+                                        :user_id,
+                                        :citationtype,
+                                        :howpublished,
+                                        :note)"""
             db.session.execute(sql, {
                 "author":fields["authors"],
                 "title":fields["title"],
@@ -84,13 +99,24 @@ def add_citation(fields):
         except:
             return False
 
-            
+
 def get_citations():
     if not session:
         return False
     user_id = session.get("user_id")
     try:
         sql = "SELECT * FROM entries WHERE user_id=:user_id ORDER BY author ASC"
+        result = db.session.execute(sql, {"user_id":user_id})
+        return result.fetchall()
+    except:
+        return False
+
+def get_citations_ordred_by_type():
+    if not session:
+        return False
+    user_id = session.get("user_id")
+    try:
+        sql = "SELECT * FROM entries WHERE user_id=:user_id ORDER BY citationtype, author ASC"
         result = db.session.execute(sql, {"user_id":user_id})
         return result.fetchall()
     except:
@@ -145,12 +171,16 @@ def form_citations_library():
             citations_library[citation[0]]["note"] = citation[15]
     return citations_library
 
-def form_citations_list(tag = None):
+def form_citations_list(tag = None, order_by = None):
     citation_list = []
     if not session:
         return False
     if tag is None:
-        citations = get_citations()
+        if order_by:
+            citations = get_citations_ordred_by_type()
+        else:
+            citations = get_citations()
+
     else:
         citations = get_citations_with_tag(tag)
     for citation in citations:

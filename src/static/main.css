@@ -1,47 +1,75 @@
 body {
-    margin: auto;
-    padding: 5%;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: auto;
+  padding: 5%;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 .header-text {
-    font-weight: bold;
-    color: black;
-    font-size: 1.6em;
-    text-align: center;
+  font-weight: bold;
+  color: black;
+  font-size: 1.6em;
+  text-align: center;
 }
 
-hr { 
-    background-color: black;
-    height: 2px;
-    border: 0;
+hr {
+  background-color: black;
+  height: 2px;
+  border: 0;
 }
 
 .register {
-    color: black;
-    font-size: 1.4em;
-    text-align: center;
+  color: black;
+  font-size: 1.4em;
+  text-align: center;
 }
 
-input[type='checkbox'] {
-    width:30px;
-    height:26px;
+input[type="checkbox"] {
+  width: 30px;
+  height: 26px;
 }
 
-input[type='submit'] {
-    margin: 2px;
+input[type="submit"] {
+  margin: 2px;
 }
 
 #tags {
-    text-decoration: none;
-    border: 2px;
-    padding: 6px;
-    margin-left: 10px;
-    background-color: #B6DDFF;
-    color: black;
-    border-radius: 6px;
+  text-decoration: none;
+  border: 2px;
+  padding: 6px;
+  margin-left: 10px;
+  background-color: #b6ddff;
+  color: black;
+  border-radius: 6px;
 }
 
 #tags:hover {
-    filter: brightness(80%);
+  filter: brightness(80%);
+}
+#order-button {
+  text-decoration: none;
+  border: 2px;
+  padding: 6px;
+  margin-left: 10px;
+  background-color: #b6ddff;
+  color: black;
+  border-radius: 6px;
+}
+
+#order-button:hover {
+  filter: brightness(80%);
+}
+.a-button-light {
+  background-color: white;
+  border: 1px solid;
+}
+
+#add_for_tag {
+    text-decoration: none;
+    margin: 20px;
+    display:inline-block;
+    border-radius: 6px;
+    border: 2px;
+    background-color: grey;
+    color: white;
+    padding: 5px;
 }
