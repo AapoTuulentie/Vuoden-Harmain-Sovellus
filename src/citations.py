@@ -9,8 +9,11 @@ def add_citation(fields):
     if not session or fields["title"] == "" or not fields["year"].isdigit():
         return False
     user_id = session.get("user_id")
-    characters = ascii_letters + digits
-    shorthand = "".join(choice(characters) for i in range(8))
+    if fields["shorthand"] == "":
+        characters = ascii_letters + digits
+        shorthand = "".join(choice(characters) for i in range(8))
+    else:
+        shorthand = fields["shorthand"]
     if fields["citationtype"] == "Book":
         try:
             sql = """INSERT INTO entries (author,
@@ -223,24 +226,52 @@ def check_correct_user(user_id):
     except:
         return False
 
-def modify_citation(citation_id, author, title, publisher, year, doi, isbn, editor, pages, shorthand):
+def modify_citation(citation_id, fields):
     if not session:
         return False
-    authors = form_authors(author)
+    authors = form_authors(fields["author"])
     user_id = session.get("user_id")
     #Otin tästä check_correct_user tarkistamisen pois. Käyttäjän varmistamiseen riittää vain user_id=user_id sql-haun perässä
-    try:
-        sql = """UPDATE entries SET author=:author, title=:title,
-        publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
-        pages=:pages, shorthand=:shorthand WHERE id=:citation_id AND user_id=:user_id"""
+    if fields["type"] == "Book":
+        try:
+            sql = """UPDATE entries SET author=:author, title=:title,
+            publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
+            pages=:pages, shorthand=:shorthand, note=:note WHERE id=:citation_id AND user_id=:user_id"""
 
-        db.session.execute(sql, {"citation_id":citation_id, "user_id":user_id, "author":authors, "title":title,
-        "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
-        "editor":editor, "pages":pages, "shorthand":shorthand})
+            db.session.execute(sql, {"citation_id":citation_id, "user_id":user_id, "author":authors, "title":fields["title"],
+            "publisher":fields["publisher"], "year":fields["year"], "doi":fields["doi"], "isbn":fields["isbn"],
+            "editor":fields["editor"], "pages":fields["pages"], "shorthand":fields["shorthand"], "note":fields["note"]})
 
-        db.session.commit()
-    except:
-        return False
+            db.session.commit()
+        except:
+            return False
+
+    if fields["type"] == "Article":
+        try:
+            sql = """UPDATE entries SET author=:author, title=:title,
+            year=:year, doi=:doi, isbn=:isbn, pages=:pages,
+            shorthand=:shorthand, journal=:journal, note=:note WHERE id=:citation_id AND user_id=:user_id"""
+
+            db.session.execute(sql, {"citation_id":citation_id, "user_id":user_id, "author":authors, "title":fields["title"],
+            "year":fields["year"], "doi":fields["doi"], "isbn":fields["isbn"], "pages":fields["pages"],
+            "shorthand":fields["shorthand"], "journal":fields["journal"], "note":fields["note"]})
+
+            db.session.commit()
+        except:
+            return False
+    
+    else:
+        try:
+            sql = """UPDATE entries SET author=:author, title=:title,
+            year=:year, shorthand=:shorthand, howpublished=:howpublished,
+            note=:note WHERE id=:citation_id AND user_id=:user_id"""
+
+            db.session.execute(sql, {"citation_id":citation_id, "user_id":user_id, "author":authors, "title":fields["title"],
+            "year":fields["year"], "shorthand":fields["shorthand"], "howpublished":fields["howpublished"], "note":fields["note"]})
+
+            db.session.commit()
+        except:
+            return False
 
 def form_authors(author):
     full_names = arrange_authors(author)
