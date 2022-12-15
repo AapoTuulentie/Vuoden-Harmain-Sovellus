@@ -22,3 +22,26 @@ hr {
     font-size: 1.4em;
     text-align: center;
 }
+
+input[type='checkbox'] {
+    width:30px;
+    height:26px;
+}
+
+input[type='submit'] {
+    margin: 2px;
+}
+
+#tags {
+    text-decoration: none;
+    border: 2px;
+    padding: 6px;
+    margin-left: 10px;
+    background-color: #B6DDFF;
+    color: black;
+    border-radius: 6px;
+}
+
+#tags:hover {
+    filter: brightness(80%);
+}

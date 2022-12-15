@@ -13,4 +13,13 @@ def new_tag(tag):
     except:
         return False
 
-#def delete_tag(tag):
+def get_tags():
+    if not session:
+        return False
+    user_id = session.get("user_id")
+    try:
+        sql = "SELECT tag FROM tags WHERE user_id=:user_id"
+        result = db.session.execute(sql, {"user_id":user_id})
+        return result.fetchall()
+    except:
+        return False

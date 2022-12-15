@@ -5,13 +5,15 @@ from os import getenv
 import users
 import citations
 import actions
+import tags
 
 app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
     citations_list = citations.form_citations_list()
-    return render_template("frontpage.html", citations=citations_list)
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -56,13 +58,21 @@ def reset_database():
 def add_citation():
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
-    title = request.form["title"]
-    author = request.form["author"]
-    year = request.form["year"]
-    citationtype = request.form["citationtype"]
-    journal = request.form["journal"]
-    authors = citations.form_authors(author)
-    if not citations.add_citation(authors, title, year, citationtype, journal):
+    fields = {}
+    fields["citationtype"] = request.form["citationtype"]
+    fields["title"] = request.form["title"]
+    authors = citations.form_authors(request.form["author"])
+    fields["authors"] = authors
+    fields["year"] = request.form["year"]
+
+    if fields["citationtype"] == "Article":
+        fields["journal"] = request.form["journal"]
+    
+    if fields["citationtype"] == "Misc":
+        fields["howpublished"] = request.form["howpublished"]
+        fields["note"] = request.form["note"]
+        
+    if not citations.add_citation(fields):
         return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 
@@ -74,7 +84,7 @@ def delete_citation():
     citations.delete_citation(citation_id)
     return redirect("/")
 
-@app.route("/modify_citation/<int:id>", methods=["GET", "POST"])
+@app.route("/modify_citation/<int:citation_id>", methods=["GET", "POST"])
 def modify_citation(citation_id):
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
@@ -105,6 +115,29 @@ def bib():
         if create_bibtex_from_checked_citations(id_list):
             path = f"{username}.bib"
             return send_file(path, as_attachment=True)
+
+@app.route("/tag_citations/<tag>", methods=["POST", "GET"])
+def tag_citations(tag):
+    if request.method == "POST":
+        id_list = request.form.getlist("check")
+        citations.tag_citations(tag, id_list)
+        return redirect("/")
+    
+    citations_list = citations.form_citations_list()
+    return render_template("tag_citations.html", citations=citations_list ,tag=tag)
+
+@app.route("/new_tag", methods=["POST"])
+def new_tag():
+    tag = request.form["tag"]
+    tags.new_tag(tag)
+    return redirect("/tag_citations/"+tag)
+
+@app.route("/tag/<tag>")
+def citations_with_tag(tag):
+    citations_list = citations.form_citations_list(tag)
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
+
 
 @app.route("/dlbib")
 def download_bib_file():
