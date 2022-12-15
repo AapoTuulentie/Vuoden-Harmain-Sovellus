@@ -54,6 +54,18 @@ def get_citations():
     except:
         return False
 
+def get_citations_with_tag(tag):
+    if not session:
+        return False
+    user_id = session.get("user_id")
+    try:
+        sql = "SELECT * FROM entries WHERE tag =:tag AND user_id=:user_id ORDER BY author ASC"
+        result = db.session.execute(sql, {"tag":tag, "user_id":user_id})
+        return result.fetchall()
+    except:
+        return False
+
+
 def delete_citation(id):
     if not session:
         return False
@@ -89,13 +101,14 @@ def form_citations_library():
             citations_library[citation[0]]["journal"] = citation[12]
     return citations_library
 
-    
-
-def form_citations_list():
+def form_citations_list(tag = None):
     citation_list = []
     if not session:
         return False
-    citations = get_citations()
+    if tag is None:
+        citations = get_citations()
+    else:
+        citations = get_citations_with_tag(tag)
     for citation in citations:
         (citation_id, author, title, publisher, year,
         doi, isbin, editor, pages, shorthand, user_id, citationtype, journal, tag) = citation
@@ -140,19 +153,20 @@ def modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages
     if not session:
         return False
     authors = form_authors(author)
-    if check_correct_user(id) == session.get("user_id"):
-        try:
-            sql = """UPDATE entries SET author=:author, title=:title,
-            publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
-            pages=:pages, shorthand=:shorthand WHERE id=:id"""
+    user_id = session.get("user_id")
+    #Otin tästä check_correct_user tarkistamisen pois. Käyttäjän varmistamiseen riittää vain user_id=user_id sql-haun perässä
+    try:
+        sql = """UPDATE entries SET author=:author, title=:title,
+        publisher=:publisher, year=:year, doi=:doi, isbn=:isbn, editor=:editor,
+        pages=:pages, shorthand=:shorthand WHERE id=:id AND user_id=:user_id"""
 
-            db.session.execute(sql, {"id":id, "author":authors, "title":title,
-            "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
-            "editor":editor, "pages":pages, "shorthand":shorthand})
+        db.session.execute(sql, {"id":id, "user_id":user_id, "author":authors, "title":title,
+        "publisher":publisher, "year":year, "doi":doi, "isbn":isbn,
+        "editor":editor, "pages":pages, "shorthand":shorthand})
 
-            db.session.commit()
-        except:
-            return False
+        db.session.commit()
+    except:
+        return False
 
 def form_authors(author):
     full_names = arrange_authors(author)
@@ -175,3 +189,16 @@ def arrange_authors(author):
         full_names.append(names)
     full_names.sort(key=lambda s: s[len(s)-1].lower())
     return full_names
+
+def tag_citations(tag, id_list):
+    if not session:
+        return False
+    user_id = session.get("user_id")
+    id_list = tuple(id_list)
+    print(id_list)
+    try:
+        sql = """UPDATE entries SET tag=:tag WHERE id IN :id_list AND user_id=:user_id"""
+        db.session.execute(sql, {"tag":tag, "id_list":id_list, "user_id":user_id})
+        db.session.commit()
+    except:
+        return False
