@@ -15,7 +15,7 @@
 |  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
 |   | Jaakko  | testauksessa  | 0.5h |
 |  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
-|   |  Jaakko | Aloitettu  | 2h |
+|   |  Jaakko | testauksessa  | 1h |
 |  **Tägit**    |
 | Tägejä voi lisätä viitteille  | Sauli |  Muutama ominaisuus sekä testaus puuttuu | 1h |
 | Viitteitä voi filtteröidä tägien perusteella  | Sauli | Testaus puuttuu | 15 min  |
