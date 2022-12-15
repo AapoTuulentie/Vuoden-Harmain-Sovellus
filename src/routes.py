@@ -15,7 +15,7 @@ def index():
     colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
     if args:
         order_by_type = args.get("order")
-        
+
         citations_list = citations.form_citations_list(None, order_by_type)
     else:
         citations_list = citations.form_citations_list()
@@ -73,11 +73,11 @@ def add_citation():
 
     if fields["citationtype"] == "Article":
         fields["journal"] = request.form["journal"]
-    
+
     if fields["citationtype"] == "Misc":
         fields["howpublished"] = request.form["howpublished"]
         fields["note"] = request.form["note"]
-        
+
     if not citations.add_citation(fields):
         return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
@@ -128,7 +128,7 @@ def tag_citations(tag):
         id_list = request.form.getlist("check")
         citations.tag_citations(tag, id_list)
         return redirect("/")
-    
+
     citations_list = citations.form_citations_list()
     return render_template("tag_citations.html", citations=citations_list ,tag=tag)
 

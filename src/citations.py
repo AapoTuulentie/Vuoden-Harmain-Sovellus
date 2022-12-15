@@ -68,7 +68,22 @@ def add_citation(fields):
             return False
     if fields["citationtype"] == "Misc":
         try:
-            sql = "INSERT INTO entries (author, title, year, shorthand, user_id, citationtype, howpublished, note) VALUES (:author, :title, :year, :shorthand, :user_id, :citationtype, :howpublished, :note)"
+            sql = """INSERT INTO entries (author,
+                                        title,
+                                        year,
+                                        shorthand,
+                                        user_id,
+                                        citationtype,
+                                        howpublished,
+                                        note)
+                                  VALUES (:author,
+                                        :title,
+                                        :year,
+                                        :shorthand,
+                                        :user_id,
+                                        :citationtype,
+                                        :howpublished,
+                                        :note)"""
             db.session.execute(sql, {
                 "author":fields["authors"],
                 "title":fields["title"],
@@ -84,7 +99,7 @@ def add_citation(fields):
         except:
             return False
 
-            
+
 def get_citations():
     if not session:
         return False
@@ -165,7 +180,7 @@ def form_citations_list(tag = None, order_by = None):
             citations = get_citations_ordred_by_type()
         else:
             citations = get_citations()
-    
+
     else:
         citations = get_citations_with_tag(tag)
     for citation in citations:
