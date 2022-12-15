@@ -54,7 +54,7 @@
 | **Käyttäjä voi luoda viitteen haluamastaan lähdetyypistä (artikkeli jne.)** |
 | Käyttäjä voi valita kirjan tai artikkelin väliltä                           | Jenni      | Aloitettu                  | 15min                          |
 
-| **Käyttäjä voi muokata tallentamiaan viitteitä**  
+| **Käyttäjä voi muokata tallentamiaan viitteitä**  |  |   |  |
 |Viitteen vieressä nappi, joka vie muutos sivulle | Eero | Valmis | |
 | Muutos sivulla lomake, joissa default arvoina viitteen nykyiset tiedot | Eero | Valmis | |
 | Viiteen default arvoja voi muokkaa | Eero | Valmis | |
