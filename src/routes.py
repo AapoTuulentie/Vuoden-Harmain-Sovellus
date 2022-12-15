@@ -6,13 +6,15 @@ from os import getenv
 import users
 import citations
 import actions
+import tags
 
 app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
     citations_list = citations.form_citations_list()
-    return render_template("frontpage.html", citations=citations_list)
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -106,6 +108,29 @@ def bib():
         if create_bibtex_from_checked_citations(id_list):
             path = f"{username}.bib"
             return send_file(path, as_attachment=True)
+
+@app.route("/tag_citations/<tag>", methods=["POST", "GET"])
+def tag_citations(tag):
+    if request.method == "POST":
+        id_list = request.form.getlist("check")
+        citations.tag_citations(tag, id_list)
+        return redirect("/")
+    
+    citations_list = citations.form_citations_list()
+    return render_template("tag_citations.html", citations=citations_list ,tag=tag)
+
+@app.route("/new_tag", methods=["POST"])
+def new_tag():
+    tag = request.form["tag"]
+    tags.new_tag(tag)
+    return redirect("/tag_citations/"+tag)
+
+@app.route("/tag/<tag>")
+def citations_with_tag(tag):
+    citations_list = citations.form_citations_list(tag)
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
+
 
 @app.route("/dlbib")
 def download_bib_file():
