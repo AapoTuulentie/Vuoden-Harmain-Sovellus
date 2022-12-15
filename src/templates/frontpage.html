@@ -170,15 +170,6 @@
 <span style="font-size:26px;">Viitteesi</span>
 <a href="/" id="tags" style="background-color:white; border: 1px solid;">Kaikki</a>
 
-
-        {% if request.args.get("order") %}
-        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/" role="button">Vaihda järjestystä</a>
-        <span style="font-size:20px;"><br/>Järjestetty tyypin mukaan</span>
-
-        {% else %}
-        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/?order=by_type" role="button">Vaihda järjestystä</a>
-        <span style="font-size:20px;"><br/>Järjestetty kirjailijan mukaan</span>
-        {% endif %}
 {% for tag in tags %}
 {% if on_tag == tag[0] %}
     {% if loop.index0 < 4 %}
@@ -194,6 +185,14 @@
     {% endif %}
 {% endif %}
 {% endfor %}
+{% if request.args.get("order") %}
+        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/" role="button">Vaihda järjestystä</a>
+        <span style="font-size:20px;"><br/>Järjestetty tyypin mukaan</span>
+
+        {% else %}
+        <a style="background-color:white; border: 1px solid;" id= "order-button" href="/?order=by_type" role="button">Vaihda järjestystä</a>
+        <span style="font-size:20px;"><br/>Järjestetty kirjailijan mukaan</span>
+        {% endif %}
 <br>
 {% if on_tag %}
 <a href="/tag_citations/{{on_tag}}" id="add_for_tag" >Lisää viitteitä tunnisteelle {{on_tag}}</a>
