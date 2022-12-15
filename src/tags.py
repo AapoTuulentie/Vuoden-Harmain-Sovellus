@@ -13,7 +13,6 @@ def new_tag(tag):
     except:
         return False
 
-<<<<<<< HEAD
 def get_tags():
     if not session:
         return False
@@ -24,6 +23,3 @@ def get_tags():
         return result.fetchall()
     except:
         return False
-=======
-#def delete_tag(tag):
->>>>>>> 3b1163de3958c47aa9f7455de6af43a37c57cb65
