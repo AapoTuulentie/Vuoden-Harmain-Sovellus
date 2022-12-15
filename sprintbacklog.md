@@ -3,9 +3,9 @@
 
 | **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
 |---|---|---|---|
-|  **Viitetyypiksi miscellaneous**    |
-| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Aloitettu  | 1h  |
-|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Aloitettu | 5min |
+|  **Viitetyypiksi miscellaneous**    | Jenni | Testit puuttuvat | 15min |
+| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Valmis  |   |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Valmis |  |
 |   |   |   |   |
 |  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo | Testauksessa
 |   |   |   |   |
