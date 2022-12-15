@@ -9,8 +9,11 @@ def add_citation(fields):
     if not session or fields["title"] == "" or not fields["year"].isdigit():
         return False
     user_id = session.get("user_id")
-    characters = ascii_letters + digits
-    shorthand = "".join(choice(characters) for i in range(8))
+    if fields["shorthand"] == "":
+        characters = ascii_letters + digits
+        shorthand = "".join(choice(characters) for i in range(8))
+    else:
+        shorthand = fields["shorthand"]
     if fields["citationtype"] == "Book":
         try:
             sql = """INSERT INTO entries (author,
