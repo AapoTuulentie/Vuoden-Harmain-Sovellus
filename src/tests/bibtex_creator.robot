@@ -76,4 +76,4 @@ Go To Main Page First
     Go To Main Page
 
 Inspect Bibtex
-    Click Element  Tarkastele_bib
+    Click Link  Tarkastele bib-tiedostoa
