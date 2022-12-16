@@ -2,26 +2,21 @@
 
 #### Sprint 3
 
-| **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** |
-|---|---|---|---|
-|  **Viitetyypiksi miscellaneous**    | Jenni | Testit puuttuvat | 15min |
-| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Valmis  |   |
-|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Valmis |  |
-|   |   |   |   |
-|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo | Testauksessa
-|   |   |   |   |
-|  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |
-| Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |
-| Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Testauksessa| 20 min |
-|  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**    |
-|   | Jaakko  | testauksessa  | 0.5h |
-|  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |
-|   |  Jaakko | testauksessa  | 1h |
+| **User story**  | **Tekijä**  | **Status**  |  **Arvioitu työmäärä jäljellä** | **Testi** |
+|---|---|---|---|---|
+|  **Viitetyypiksi miscellaneous**    | Jenni | Testit puuttuvat | 15min |  |
+| **Tallennettavat kentät avautuvat viitteen tyypin mukaan**  | Jenni  | Valmis  |   |   |
+|  **Bibtext ID:tä ei pidä pystyä muokkaamaan**    | Jenni  | Valmis |  |   |
+|  **Checkbox jolla voi valita tulosteeseen tulevat viitteet listauksesta**    | Aapo | Testauksessa |  |   |
+|  **Jos kirjoittajia enemmän kuin yksi, viitteessä näkee kirjoittajat sukunimen mukaan aakkosissa**    |   |   |   |  [Two Authors Are Arranged Correctly When New Citation Added, Multiple Authors Are Arranged Correctly When New Citation Added, Multiple Authors Are Arranged Correctly When Citation Modified](https://github.com/AapoTuulentie/Vuoden-Harmain-Sovellus/blob/main/src/tests/citations.robot) |
+| Html kertoo käyttäjälle, että muut kirjoittajat erotetaan kaksoispilkulla (;)  | Eero  | Valmis  |   |   |
+| Backend erottaa kirjoittajat, ja järjestää ne sukunimen mukaan | Eero | Valmis |  | |
+|  **Listauksessa viitteet listataan kirjoittajat sukunimen mukaan aakkosissa**  | Jaakko  | testauksessa  | 0.5h |   |
+|  **Namiska jolla viitteet listataan tyyppien mukaan ryhmiteltynä, ryhmissä kirjoittajat sukunimen mukaan aakkosissa**    |  Jaakko | testauksessa  | 1h |   |
 |  **Tägit**    |
-| Tägejä voi lisätä viitteille  | Sauli |  Muutama ominaisuus sekä testaus puuttuu | 1h |
-| Viitteitä voi filtteröidä tägien perusteella  | Sauli | Testaus puuttuu | 15 min  |
-|  **Käyttöliittymän kielen voi vaihtaa**    |  |    |   |
-|  |  |  |
+| Tägejä voi lisätä viitteille  | Sauli |  Muutama ominaisuus sekä testaus puuttuu | 1h |   |
+| Viitteitä voi filtteröidä tägien perusteella  | Sauli | Testaus puuttuu | 15 min  |   |
+|  **Käyttöliittymän kielen voi vaihtaa**    |  | Tekemättä |   |
 
 #### Sprint 2
 
