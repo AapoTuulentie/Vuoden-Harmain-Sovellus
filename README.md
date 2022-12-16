@@ -2,6 +2,12 @@
 [Backlog](https://docs.google.com/document/d/1oMghClv79tLXwznH7Zgw1BvnMm40N23Djq-XPNMBtpQ/edit)\
 [Sprint Backlog](https://github.com/AapoTuulentie/Vuoden-Harmain-Sovellus/blob/main/sprintbacklog.md)
 
+## Projektin asennus
+1. Asenna PostgreSQL
+2. Asenna poetry
+3. Asenna projektin riippuvuudet komennolla ```poetry install```
+4. ...
+
 ## Definition of Done
 - Toiminnallisuus on koodattu
 - Toiminnallisuudelle on tehty järkevät robot testit, jotka menevät läpi
