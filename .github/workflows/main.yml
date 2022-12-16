@@ -68,6 +68,8 @@ jobs:
           PGPASSWORD: postgres_password
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: '2.32'
       - run: |
             export DISPLAY=:99
             chromedriver --url-base=/wd/hub &
