@@ -8,7 +8,7 @@ Test Setup  Go To Main Page
 
 Add And View Citation After Registering
     Go To Register Page
-    Set Username  kayttaja1
+    Set Username  innokas_lukija
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Credentials
@@ -77,6 +77,9 @@ Submit Citation
 
 Choose Book
     Click Button  Kirja
+
+Choose Article
+    Click Button  Artikkeli
 
 Delete Citation
     Click Button  Poista

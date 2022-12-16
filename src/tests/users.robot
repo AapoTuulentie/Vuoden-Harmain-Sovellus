@@ -36,7 +36,7 @@ Can not Register With Too Short Password
 
 Can not Register With Password Mismatch
     Go To Register Page
-    Set Username  nimi
+    Set Username  Paavo_pesusieni
     Set Password  salasana123
     Set Password Confirmation  salaminaama123
     Submit Credentials
@@ -46,12 +46,12 @@ Registered User Should Be Able To Log In
     Reset Database First
 
     Go To Register Page
-    Set Username  nimi1  
+    Set Username  opiskelija
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Credentials
     Log Out
-    Set Username  nimi1
+    Set Username  opiskelija
     Set Password Main Page  salasana123
     Log In
     Log In Should Succeed 

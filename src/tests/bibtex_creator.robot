@@ -9,7 +9,7 @@ Test Setup  Go To Main Page First
 Add Book Adds Entry to Bibtex
     Reset Database First
     Go To Register Page
-    Set Username  nimi
+    Set Username  Bibtextaaja8
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Credentials
