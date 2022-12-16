@@ -9,7 +9,7 @@ Test Setup  Go To Main Page
 Register With Valid Username And Password
     Reset Database First
     Go To Register Page
-    Set Username  nimi
+    Set Username  Gradu_opiskelija
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Credentials
