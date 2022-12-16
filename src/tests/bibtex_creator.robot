@@ -13,12 +13,22 @@ Add Book Adds Entry to Bibtex
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Credentials
-    Set Title  kirja
-    Set Author  kirjailija
-    Set Year  1999
+    Click Button  Kirja
+    Set Title   Kyberias 
+    Set Author   Stanislaw Lem 
+    Set Year   1999 
+    Set Citekey   oma viite 
     Submit Entry
     Inspect Bibtex
-    page Should Contain  author = "kirjailija", title = "kirja", year = "1999"
+    Switch Window  .bib
+    Page Should Contain  Stanislaw Lem  
+    Page Should Contain  Kyberias 
+    Page Should Contain  1999  
+    Page Should Contain  oma viite   
+
+    Switch Window  Otsikko
+    Go To Main Page
+    Log Out 
 
 *** Keywords ***
 
@@ -42,6 +52,10 @@ Set Author
     [Arguments]  ${author}
     Input Text  author  ${author}
 
+Set Citekey
+    [Arguments]  ${citekey}
+    Input Text  citekey  ${citekey}
+
 Set Year
     [Arguments]  ${year}
     Input Text  year  ${year}
@@ -62,4 +76,4 @@ Go To Main Page First
     Go To Main Page
 
 Inspect Bibtex
-    Click Element  Tarkastele
+    Click Element  Tarkastele_bib
