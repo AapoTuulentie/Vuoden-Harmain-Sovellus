@@ -26,11 +26,8 @@ Add Book Adds Entry to Bibtex
     Page Should Contain  Kyberias 
     Page Should Contain  1999  
     Page Should Contain  oma viite   
-
     Switch Window  Otsikko
-    Execute JavaScript  window.scrollTo(0,0)
     Go To Main Page
-    Log Out 
 
 *** Keywords ***
 
