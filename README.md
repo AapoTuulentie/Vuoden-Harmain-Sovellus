@@ -13,10 +13,10 @@
 8. Käynnistä sovellus src hakemistossa komennolla ```flask run```
 
 ## Testien ajo
-1. Tee tietokanta psql tulkilla, jonka nimi sisältää merkkijonon 'test'.
+1. Tee tietokanta psql tulkilla, jonka nimi sisältää merkkijonon 'test', esim. `DATABASE_URL=postgresql:///harmaintest`
 2. Tee projektin juureen `.env.test` tiedosto, joissa samat tiedot kuin .env tiedostossa, mutta tietokannan osoitteen pitää olla juuri luodun testi-tietokannan nimi.
-3. Aja komento ```dotenv -f ../.env.test run -- flask run``` src hakemistossa toisella terminaalilla
-4. Nyt voit ajaa testit virtuaaliympäristössä ```poetry shell``` komennolla ```robot src/tests```
+3. Siirry src hakemistossa virtuaaliympäristöön komennolla ```poetry shell``` ja laita testi-serveri päälle komennolla ```dotenv -f ../.env.test run -- flask run``` 
+4. Nyt voit ajaa testit virtuaaliympäristössä ```poetry shell``` komennolla ```robot src/tests``` tai ilman virtuaaliympäristöä komennolla ```poetry run robot src/tests```
 
 ## Definition of Done
 - Toiminnallisuus on koodattu
