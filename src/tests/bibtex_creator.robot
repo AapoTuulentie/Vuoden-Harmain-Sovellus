@@ -19,6 +19,7 @@ Add Book Adds Entry to Bibtex
     Set Year   1999 
     Set Citekey   oma viite 
     Submit Entry
+    Execute JavaScript  window.scrollTo(0,2000)
     Inspect Bibtex
     Switch Window  .bib
     Page Should Contain  Stanislaw Lem  
@@ -27,6 +28,7 @@ Add Book Adds Entry to Bibtex
     Page Should Contain  oma viite   
 
     Switch Window  Otsikko
+    Execute JavaScript  window.scrollTo(0,0)
     Go To Main Page
     Log Out 
 
