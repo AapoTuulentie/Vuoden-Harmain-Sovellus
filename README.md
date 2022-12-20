@@ -1,6 +1,7 @@
 # Vuoden-Harmain-Sovellus
 [Backlog](https://docs.google.com/document/d/1oMghClv79tLXwznH7Zgw1BvnMm40N23Djq-XPNMBtpQ/edit)\
-[Sprint Backlog](https://github.com/AapoTuulentie/Vuoden-Harmain-Sovellus/blob/main/sprintbacklog.md)
+[Sprint Backlog](https://github.com/AapoTuulentie/Vuoden-Harmain-Sovellus/blob/main/sprintbacklog.md)\
+[Loppuraportti](https://docs.google.com/document/d/1qc828bSGWhAvu27fsx1mrPJhMI1TUBhMevO3DXk0u8E/edit?usp=sharing)
 
 ## Projektin asennus
 1. Asenna PostgreSQL
