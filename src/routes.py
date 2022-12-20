@@ -9,6 +9,7 @@ import tags
 
 app.secret_key = getenv("SECRET_KEY")
 
+
 @app.route("/")
 def index():
     args = request.args
