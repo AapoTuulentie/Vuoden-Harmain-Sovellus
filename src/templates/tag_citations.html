@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<a href="/" id="add_for_tag" style="font-size:25px">Takaisin etusivulle</a>
+<br>
+<p style="font-size:26px">Valitse viitteet, joille tunniste {{tag}} lisätään</p>
+<br>
+{% for citation in citations %}
+
+{{citation[0]}}
+<br>
+<input type="checkbox" name="check" id="tag_checkboxes" value="{{ citation[1] }}" form="checkbox">
+<hr>
+{% endfor %}
+<form action="/tag_citations/{{tag}}" method="POST" id="checkbox">
+    <input type="submit" value="Lisää tunniste viitteille">
+</form>
+{% endblock %}

@@ -5,7 +5,7 @@ Library  ../AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
-${DELAY}  0.0 seconds
+${DELAY}  0.2 seconds
 ${HOME URL}  http://${SERVER}
 ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
@@ -34,6 +34,9 @@ Go To Login Page
 
 Go To Register Page
     Go To  ${REGISTER URL}
+
+Bibtex Should Contain
+    Page Should Contain  @Book{None, author = "kirjailija", title = "Otsikko", year = "1999", }
 
 Log Out
     Click Link  Kirjaudu ulos

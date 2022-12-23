@@ -1,17 +1,26 @@
 from os import getenv
 from app import app
-from bibtex_creator import create_bibtex_from_all_citations
+from bibtex_creator import create_bibtex_from_all_citations, create_bibtex_from_checked_citations
 from flask import redirect, render_template, request, send_file, session
 import users
 import citations
 import actions
+import tags
 
 app.secret_key = getenv("SECRET_KEY")
 
+
 @app.route("/")
 def index():
-    citations_list = citations.form_citations_list()
-    return render_template("frontpage.html", citations=citations_list)
+    args = request.args
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
+    if args:
+        order_by_type = args.get("order")
+
+        citations_list = citations.form_citations_list(None, order_by_type)
+    else:
+        citations_list = citations.form_citations_list()
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -37,6 +46,8 @@ def register():
                                    error="Salasanassa pitää olla vähintään 8 merkkiä")
         if len(password1) > 30:
             return render_template("errors.html", error="Salasanassa saa olla enintään 30 merkkiä")
+        if len(username) > 30:
+            return render_template("errors.html", error="Käyttäjänimessä saa olla enintään 30 merkkiä")
         users.new_user(username, password1)
         return redirect("/")
 
@@ -54,42 +65,102 @@ def reset_database():
 def add_citation():
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
-    title = request.form["title"]
-    author = request.form["author"]
-    year = request.form["year"]
-    citationtype = request.form["citationtype"]
-    journal = request.form["journal"]
-    authors = citations.form_authors(author)
-    if not citations.add_citation(authors, title, year, citationtype, journal):
-        return render_template("errors.html", error="Ei onnistunut")
+    fields = {}
+    fields["citationtype"] = request.form["citationtype"]
+    fields["title"] = request.form["title"]
+    authors = citations.form_authors(request.form["author"])
+    fields["authors"] = authors
+    fields["year"] = request.form["year"]
+    fields["shorthand"] = request.form["citekey"]
+
+    if fields["citationtype"] == "Article":
+        fields["journal"] = request.form["journal"]
+
+    if fields["citationtype"] == "Misc":
+        fields["howpublished"] = request.form["howpublished"]
+        fields["note"] = request.form["note"]
+
+    if not citations.add_citation(fields):
+        return render_template("errors.html", error="Viitteen tallennus ei onnistunut")
     return redirect(request.referrer)
 
 @app.route("/delete_citation", methods=["POST"])
 def delete_citation():
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
-    id = request.form["id"]
-    citations.delete_citation(id)
+    citation_id = request.form["id"]
+    citations.delete_citation(citation_id)
     return redirect("/")
 
-@app.route("/modify_citation/<int:id>", methods=["GET", "POST"])
-def modify_citation(id):
+@app.route("/modify_citation/<int:citation_id>", methods=["GET", "POST"])
+def modify_citation(citation_id):
     if not session:
         return render_template("errors.html", error="Et ole kirjautunut")
     if request.method == "GET":
-        return render_template("modify_citation.html", citation=citations.get_one_citation(id))
+        return render_template("modify_citation.html", citation=citations.get_one_citation(citation_id))
     if request.method == "POST":
-        author = request.form["author"]
-        title = request.form["title"]
-        publisher = request.form["publisher"]
-        year = request.form["year"]
-        doi = request.form["doi"]
-        isbn = request.form["isbn"]
-        editor = request.form["editor"]
-        pages = request.form["pages"]
-        shorthand = request.form["shorthand"]
-        citations.modify_citation(id, author, title, publisher, year, doi, isbn, editor, pages, shorthand)
+        fields = {}
+        fields["type"] = request.form["citationtype"]
+        fields["author"] = request.form["author"]
+        fields["title"] = request.form["title"]
+        fields["year"] = request.form["year"]
+        fields["shorthand"] = request.form["shorthand"]
+        fields["note"] = request.form["note"]
+
+        if fields["type"] == "Book":
+            fields["publisher"] = request.form["publisher"]
+            fields["doi"] = request.form["doi"]
+            fields["isbn"] = request.form["isbn"]
+            fields["pages"] = request.form["pages"]
+            fields["editor"] = request.form["editor"]
+
+        if fields["type"] == "Article":
+            fields["doi"] = request.form["doi"]
+            fields["isbn"] = request.form["isbn"]
+            fields["pages"] = request.form["pages"]
+            fields["journal"] = request.form["journal"]
+
+        if fields["type"] == "Misc":
+            fields["howpublished"] = request.form["howpublished"]
+
+        citations.modify_citation(citation_id, fields)
     return redirect("/")
+
+@app.route("/bib", methods=["POST", "GET"])
+def bib():
+    username = session.get("user_name")
+    id_list = request.form.getlist("check")
+    if request.form["nappi"] == "Tarkastele valittujen viitteiden bib-tiedostoa":
+        if create_bibtex_from_checked_citations(id_list):
+            with open(f"{username}.bib", encoding="utf-8") as f:
+                return render_template("bibfile.html", bib=f.read())
+    if request.form["nappi"] == "Lataa bib-tiedosto valituista viitteistä":
+        if create_bibtex_from_checked_citations(id_list):
+            path = f"{username}.bib"
+            return send_file(path, as_attachment=True)
+
+@app.route("/tag_citations/<tag>", methods=["POST", "GET"])
+def tag_citations(tag):
+    if request.method == "POST":
+        id_list = request.form.getlist("check")
+        citations.tag_citations(tag, id_list)
+        return redirect("/")
+
+    citations_list = citations.form_citations_list()
+    return render_template("tag_citations.html", citations=citations_list ,tag=tag)
+
+@app.route("/new_tag", methods=["POST"])
+def new_tag():
+    tag = request.form["tag"]
+    tags.new_tag(tag)
+    return redirect("/tag_citations/"+tag)
+
+@app.route("/tag/<tag>")
+def citations_with_tag(tag):
+    citations_list = citations.form_citations_list(tag)
+    colors = ["#B6DDFF", "#FFD6BC", "#FCC", "#B0FFA9"]
+    return render_template("frontpage.html", citations=citations_list, tags=tags.get_tags(), colors=colors, on_tag=tag)
+
 
 @app.route("/dlbib")
 def download_bib_file():
@@ -99,10 +170,8 @@ def download_bib_file():
         return send_file(path, as_attachment=True)
 
 @app.route("/copybib", methods=["GET"])
-
 def display_bib():
     username = session.get("user_name")
-
     if create_bibtex_from_all_citations():
         with open(f"{username}.bib", encoding="utf-8") as f:
             return render_template("bibfile.html", bib=f.read())
